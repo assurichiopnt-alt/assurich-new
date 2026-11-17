@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASSURICH NEW</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#030714; --bg2:#081127; --card:#0b1630; --line:#1b2a4a;
+  --text:#eef2fa; --muted:#8e9ab3; --dim:#5d6a86;
+  --red:#e3141f; --red2:#ff3b45; --yellow:#ffd23f;
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,.disp{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;letter-spacing:-.02em}
+
+/* watermark */
+.wm{position:fixed;left:12px;top:8px;font-size:10px;letter-spacing:.18em;color:#fff;opacity:.12;z-index:999;pointer-events:none;font-weight:600}
+
+/* ===== HERO / CAROUSEL ===== */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:34px 0 40px;
+  background:
+    radial-gradient(1400px 340px at 50% 86%,rgba(222,166,96,.30),transparent 70%),
+    radial-gradient(800px 220px at 50% 100%,rgba(40,105,200,.35),transparent 70%),
+    radial-gradient(1200px 700px at 50% 38%,#0c2048 0%,#061334 45%,transparent 80%),
+    linear-gradient(180deg,#01030c 0%,#030a1f 50%,#06112c 82%,var(--bg) 100%)}
+.brand{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-weight:900;font-size:clamp(22px,2.4vw,30px);letter-spacing:.12em}
+.brand span{color:var(--red)}
+.status{margin-top:14px;font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center}
+.status b{color:var(--text);font-weight:600}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(227,20,31,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(227,20,31,0)}100%{box-shadow:0 0 0 0 rgba(227,20,31,0)}}
+
+.stage{position:relative;width:100%;height:clamp(420px,60vh,600px);margin-top:44px;perspective:1400px;user-select:none;touch-action:pan-y}
+.track{position:absolute;inset:0;transform-style:preserve-3d;pointer-events:none}
+.track .slide{pointer-events:auto} /* ให้กดการ์ดข้างๆ ได้ (เดิมโดนชั้น track บัง) */
+.slide{position:absolute;left:50%;top:50%;width:clamp(230px,min(22vw,38vh),340px);aspect-ratio:.66;border-radius:20px;overflow:hidden;
+  transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s,filter .7s;cursor:pointer;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.8);background:#222}
+.slide .art{position:absolute;inset:0}
+.slide .art svg{width:100%;height:100%;display:block}
+.slide .art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,transparent 35%,transparent 50%,rgba(0,0,0,.65) 100%)}
+.slide .num{position:absolute;top:18px;left:0;right:0;text-align:center;font-size:13px;letter-spacing:.2em;font-weight:600;z-index:2;opacity:.9}
+.slide .ttl{position:absolute;left:14px;right:14px;bottom:82px;text-align:center;z-index:2;font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-weight:800;font-size:clamp(20px,2vw,28px);line-height:1.05;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+.slide .sub{position:absolute;left:0;right:0;bottom:60px;text-align:center;z-index:2;font-size:13px;color:#ddd;opacity:.85}
+.slide .cta{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:2;background:#f1f4fa;color:#111;font-weight:600;font-size:14px;padding:10px 18px;border-radius:99px;white-space:nowrap;opacity:0;transition:opacity .4s}
+.slide.active .cta{opacity:1}
+.slide.active{box-shadow:0 40px 80px -20px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.08)}
+
+/* ===== BOOM FX ===== */
+#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.glow{position:absolute;left:50%;top:52%;width:900px;height:620px;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(closest-side,var(--acc,#e3141f) 0%,color-mix(in srgb,var(--acc,#e3141f) 35%,transparent) 45%,transparent 100%);opacity:.32;will-change:transform,opacity;transition:background .8s,opacity .8s;z-index:0;pointer-events:none;animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.55;transform:translate(-50%,-50%) scale(1.08)}}
+.rays{position:absolute;left:50%;top:52%;width:1400px;height:1400px;transform:translate(-50%,-50%);pointer-events:none;z-index:0;opacity:.12;
+  background:repeating-conic-gradient(from 0deg,var(--acc,#e3141f) 0deg 2deg,transparent 2deg 14deg);
+  -webkit-mask:radial-gradient(closest-side,#000 0%,transparent 70%);mask:radial-gradient(closest-side,#000 0%,transparent 70%);animation:spin 60s linear infinite;will-change:transform;transition:background .8s}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.bigword{position:absolute;left:0;right:0;top:50%;transform:translateY(-58%);text-align:center;z-index:0;pointer-events:none;white-space:nowrap;
+  font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-weight:900;font-size:clamp(90px,17vw,260px);line-height:1;letter-spacing:-.03em;
+  color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.2);text-transform:uppercase}
+.bigword.pop{animation:wordin .9s cubic-bezier(.2,.9,.2,1) both}
+@keyframes wordin{from{opacity:0;letter-spacing:.25em;filter:blur(10px)}to{opacity:1;letter-spacing:-.03em;filter:none}}
+.stage,.brand,.status,.ctrl,.hint{position:relative;z-index:2}
+.stage::after{content:"";position:absolute;left:50%;bottom:-6%;width:min(640px,70vw);height:60px;transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--acc,#e3141f) 30%,transparent),transparent);opacity:.7}
+.slide .inner{position:absolute;inset:0;transition:transform .25s ease-out;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.slide .shine{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.28) 48%,transparent 62%);transform:translateX(-120%)}
+.slide.active .shine{animation:shine 3.2s ease-in-out infinite 0.6s}
+@keyframes shine{0%{transform:translateX(-120%)}45%,100%{transform:translateX(120%)}}
+.slide.active{outline:2px solid var(--acc,#e3141f);outline-offset:-2px;box-shadow:0 40px 90px -20px rgba(0,0,0,.95),0 0 60px -6px var(--acc,#e3141f)}
+.slide.active .ttl{font-size:clamp(24px,2.3vw,34px)}
+.slide.enter{opacity:0!important;transform:translate(-50%,40%) scale(.6) rotateX(40deg)!important}
+.brand{font-size:clamp(28px,3.4vw,44px)!important;text-shadow:0 0 30px rgba(227,20,31,.35)}
+.prog{height:2px;width:140px;background:#1b2a4a;border-radius:2px;overflow:hidden;margin-top:14px;position:relative;z-index:2}
+.prog i{display:block;height:100%;width:0;background:var(--acc,#e3141f)}
+.prog i.run{animation:prog 5s linear forwards}
+@keyframes prog{to{width:100%}}
+.ctrl button:hover{box-shadow:0 0 24px -4px var(--acc,#e3141f);border-color:var(--acc,#e3141f)!important}
+.marquee{position:absolute;left:0;right:0;bottom:0;z-index:2;overflow:hidden;border-top:1px solid #1b2a4a;background:rgba(3,7,20,.88)}
+.marquee .mq{display:flex;width:max-content;animation:mq 30s linear infinite}
+.marquee span{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-weight:800;font-size:15px;letter-spacing:.14em;padding:14px 22px;color:#c9d3e6;white-space:nowrap}
+.marquee span b{color:var(--acc,#e3141f);margin-left:22px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.hero{padding-bottom:90px!important;overflow:hidden}
+.hint{position:absolute;left:28px;bottom:70px;font-size:12.5px;color:var(--dim);max-width:220px;line-height:1.5}
+.ctrl{display:flex;align-items:center;gap:30px;margin-top:34px}
+.ctrl button{width:46px;height:46px;border-radius:50%;border:1px solid #24365c;display:grid;place-items:center;transition:.2s}
+.ctrl button:hover{background:#12203f;border-color:#3b5285}
+.counter{font-size:15px;color:var(--muted);font-weight:500;min-width:64px;text-align:center}
+.counter b{color:var(--text)}
+
+/* ===== FLOATING SUPPORT TAB ===== */
+.support-tab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:60;background:#fff;color:#111;width:54px;padding:16px 0 20px;
+  display:flex;flex-direction:column;align-items:center;gap:16px;box-shadow:-6px 0 24px rgba(0,0,0,.35)}
+.support-tab .ic{width:28px;height:28px;border-radius:50%;background:var(--red);display:grid;place-items:center}
+.support-tab .vt{writing-mode:vertical-rl;transform:rotate(180deg);font-size:12.5px;font-weight:700;letter-spacing:.04em}
+.support-panel{position:fixed;right:66px;top:50%;transform:translate(20px,-50%);opacity:0;pointer-events:none;z-index:61;width:310px;
+  background:#0b1630;border:1px solid var(--line);border-radius:18px;padding:22px;transition:.3s;box-shadow:0 30px 60px rgba(0,0,0,.6)}
+.support-panel.open{opacity:1;pointer-events:auto;transform:translate(0,-50%)}
+.support-panel h4{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-size:20px;margin-bottom:4px}
+.support-panel p{font-size:13px;color:var(--muted);margin-bottom:14px}
+.sp-row{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-top:1px solid var(--line);font-size:13px}
+.sp-row span:first-child{color:var(--muted)}
+.sp-close{position:absolute;right:14px;top:12px;color:var(--muted);font-size:20px}
+
+/* ===== DETAIL ===== */
+/* หน้ารายละเอียด: เป็นหน้าเต็มจอเลื่อนขึ้นมาทับการ์ด (ไม่มีอะไรให้เลื่อนลงต่อ) */
+.detail{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;overflow-y:auto;overscroll-behavior:contain;
+  background:radial-gradient(1200px 500px at 50% 0%,#0c2048 0%,transparent 70%),linear-gradient(180deg,#030a1f 0%,var(--bg) 100%);
+  transform:translateY(100%);visibility:hidden;will-change:transform;
+  transition:transform .75s cubic-bezier(.77,0,.18,1),visibility 0s linear .75s}
+body.viewing{overflow:hidden}
+body.viewing .detail{transform:none;visibility:visible;transition:transform .75s cubic-bezier(.77,0,.18,1),visibility 0s}
+.detail-in{margin:auto 0;width:100%;max-width:1240px;padding:12px 28px 48px}
+.back{position:sticky;top:0;z-index:5;flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 20px 8px;
+  font-size:11px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase}
+.back i{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:rgba(8,17,39,.92);transition:border-color .2s,box-shadow .2s,transform .2s}
+.back:hover{color:var(--text)}
+.back:hover i{border-color:var(--acc,#e3141f);box-shadow:0 0 24px -4px var(--acc,#e3141f);transform:translateY(-3px)}
+.back i svg{animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-3px)}}
+footer{display:none}
+.pane{animation:fade .6s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:12px;letter-spacing:.2em;color:var(--dim);font-weight:600;text-transform:uppercase}
+.big{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-weight:800;font-size:clamp(40px,5vw,68px);line-height:.98;margin:12px 0 18px}
+.big em{font-style:normal;color:#7f8cab}
+.meta{display:flex;flex-wrap:wrap;gap:22px;color:var(--muted);font-size:14px;margin-bottom:24px}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:99px;font-weight:600;font-size:14.5px;transition:.2s}
+.btn.red{background:var(--red)}.btn.red:hover{background:var(--red2)}
+.btn.ghost{background:#0e1a36;border:1px solid #24365c}.btn.ghost:hover{background:#16264a}
+.badge{display:inline-block;background:var(--red);font-size:12px;font-weight:700;padding:5px 11px;border-radius:99px}
+.lead{color:#aab5cc;font-size:16px;line-height:1.65;max-width:560px}
+
+.cover{border-radius:var(--r);overflow:hidden;position:relative;aspect-ratio:1/1;box-shadow:0 40px 80px -30px rgba(0,0,0,.9)}
+.cover svg{width:100%;height:100%;display:block}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.75) 100%)}
+.cover .ov{z-index:2;position:absolute;left:28px;bottom:26px;right:28px}
+.cover .ov .t1{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-weight:900;font-size:clamp(34px,4.4vw,60px);color:var(--red);line-height:.9;letter-spacing:-.01em}
+.cover .ov .t2{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-weight:800;font-size:clamp(16px,1.8vw,24px);color:#f1f4fa;margin-top:6px}
+
+.split{display:grid;grid-template-columns:1fr 1.05fr;gap:64px;align-items:start}
+
+/* list rows (tracklist) */
+.rows{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:46px 1fr auto;align-items:center;padding:16px 4px;border-bottom:1px solid var(--line);transition:.2s}
+.row:hover{background:#15110f}
+.row .n{color:var(--dim);font-size:13px;font-weight:600}
+.row .nm{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:18px}
+.row .ds{font-size:12.5px;color:var(--muted);margin-top:3px;font-family:Inter}
+.go{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:99px;border:1px solid #24365c;font-size:12.5px;font-weight:600;color:#c9d3e6;transition:.2s;white-space:nowrap}
+.go:hover{background:var(--yellow);border-color:var(--yellow);color:#111}
+.go.soon{opacity:.45;pointer-events:none}
+
+/* boxes (embed-like) */
+.boxes{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px}
+.box{background:#0b1630;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.box-head{display:flex;gap:16px;padding:18px;align-items:center;background:linear-gradient(180deg,#12203f,#0b1630)}
+.box-head .thumb{width:92px;height:92px;border-radius:12px;overflow:hidden;flex:none}
+.box-head .thumb svg{width:100%;height:100%;display:block}
+.box-head h3{font-size:22px;font-weight:800}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;background:#24365c;color:#ddd;padding:3px 7px;border-radius:5px;margin:6px 0 4px;letter-spacing:.04em}
+.box-head p{font-size:12.5px;color:var(--muted)}
+.box .rows{border-top:1px solid var(--line)}
+.box .row{padding:12px 18px;grid-template-columns:30px 1fr auto}
+.box .row .nm{font-size:15.5px}
+.box-foot{padding:18px}
+.box-foot p{font-size:14px;color:#aab5cc;line-height:1.6;margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{font-size:12px;border:1px solid #24365c;color:#c9d3e6;padding:6px 11px;border-radius:99px}
+
+/* feature card (vinyl style) */
+.feature{background:var(--bg2);border:1px solid var(--line);border-radius:30px;padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.feature .media{position:relative;aspect-ratio:1/.93;border-radius:22px;overflow:hidden}
+.feature .media svg{width:100%;height:100%;display:block}
+.feature h2{font-weight:800;font-size:clamp(40px,4.8vw,64px);line-height:.98;margin:18px 0 20px}
+.feature h2 em{font-style:normal;color:#7f8cab}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:6px 0 28px;max-width:520px}
+.stat{border:1px solid var(--line);border-radius:14px;padding:14px}
+.stat b{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-size:28px;display:block}
+.stat span{font-size:12px;color:var(--muted)}
+
+.soon-card{border:1px dashed #24365c;border-radius:30px;padding:80px 30px;text-align:center}
+.soon-card h2{font-size:clamp(38px,5vw,60px);font-weight:800;margin:14px 0}
+
+footer{border-top:1px solid var(--line);margin-top:60px;padding:40px 28px;color:var(--dim);font-size:13px}
+footer .in{max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+footer b{color:var(--text);font-family:Archivo,'Helvetica Neue',Arial,sans-serif;letter-spacing:.1em}
+
+@media (max-width:900px){
+  .split,.feature,.boxes{grid-template-columns:1fr;gap:34px}
+  .hint{display:none}
+  .support-tab{width:44px}
+  .support-panel{right:52px;width:min(300px,80vw)}
+  .stats{grid-template-columns:repeat(3,1fr)}
+}
+/* ===== INTRO TITLE (เปิดเว็บ) ===== */
+#intro{position:fixed;inset:0;z-index:10000;cursor:pointer;overflow:hidden;background:#050404;transition:background-color .5s}
+#intro.out{background-color:transparent;pointer-events:none}
+#intro .vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:transparent;transform-origin:50% 45%;will-change:opacity,transform;
+  transition:opacity 1.3s cubic-bezier(.45,0,.25,1),transform 1.6s cubic-bezier(.3,0,.2,1)}
+#intro.out .vid{opacity:0;transform:scale(1.12)}
+@media (orientation:portrait){#intro .vid{object-fit:contain}}
+#intro .skip,#intro .snd{position:absolute;bottom:20px;z-index:4;font-size:12px;letter-spacing:.2em;color:var(--dim);border:1px solid var(--line);padding:8px 14px;border-radius:99px;background:rgba(0,0,0,.4);transition:color .2s,border-color .2s,opacity .4s}
+#intro .skip{right:20px}#intro .snd{left:20px}
+#intro .skip:hover,#intro .snd:hover{color:var(--text);border-color:var(--red)}
+#intro.out .skip,#intro.out .snd{opacity:0}
+/* ช่วงเล่นวิดีโอ: ซ่อนหน้าเว็บ + หยุดเอฟเฟกต์ทั้งหมด */
+body.intro-lock,body.intro-prep{overflow:hidden}
+body.intro-lock .hero,body.intro-lock .hero *,body.intro-prep .hero,body.intro-prep .hero *{animation-play-state:paused!important}
+body.intro-lock>*:not(#intro):not(script){visibility:hidden}
+/* ก่อนเปลี่ยนฉาก ~1.5 วิ: วาดหน้าเว็บรอไว้ใต้วิดีโอ (ตั้งท่าเริ่มต้น) */
+body.intro-prep .hero .brand,body.intro-prep .hero .status,body.intro-prep .hero .prog,body.intro-prep .hero .stage,body.intro-prep .hero .ctrl,body.intro-prep .hero .hint{opacity:0}
+/* เปลี่ยนฉาก: หน้าเว็บค่อยๆ ไล่ขึ้นมาทีละชั้น */
+body.intro-done .hero .brand{animation:hin .9s cubic-bezier(.2,.8,.2,1) .35s both}
+body.intro-done .hero .status{animation:hin .9s cubic-bezier(.2,.8,.2,1) .5s both}
+body.intro-done .hero .prog{animation:hin .9s cubic-bezier(.2,.8,.2,1) .6s both}
+body.intro-done .hero .stage{animation:hstage 1.2s cubic-bezier(.2,.8,.2,1) .45s both}
+body.intro-done .hero .ctrl{animation:hin .9s cubic-bezier(.2,.8,.2,1) .8s both}
+body.intro-done .hero .hint{animation:hin .9s cubic-bezier(.2,.8,.2,1) .7s both}
+@keyframes hin{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes hstage{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#intro{display:none}}
+/* ===== ฉากท้องฟ้ากลางคืนแบบคลิปเปิด ===== */
+.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    radial-gradient(1px 1px at 23px 41px,#fff 50%,transparent 51%),
+    radial-gradient(1px 1px at 87px 113px,rgba(255,255,255,.8) 50%,transparent 51%),
+    radial-gradient(1.5px 1.5px at 151px 27px,#cfe0ff 50%,transparent 51%),
+    radial-gradient(1px 1px at 199px 171px,rgba(255,255,255,.7) 50%,transparent 51%),
+    radial-gradient(1px 1px at 61px 203px,rgba(200,220,255,.8) 50%,transparent 51%),
+    radial-gradient(1px 1px at 131px 239px,rgba(255,255,255,.6) 50%,transparent 51%);
+  background-size:229px 251px;
+  -webkit-mask:linear-gradient(180deg,#000 0%,#000 55%,transparent 82%);mask:linear-gradient(180deg,#000 0%,#000 55%,transparent 82%);
+  opacity:.55;animation:twinkle 6s ease-in-out infinite;will-change:opacity}
+.hero::after{content:"";position:absolute;left:0;right:0;top:0;height:100%;z-index:0;pointer-events:none;
+  background-image:radial-gradient(1px 1px at 40px 60px,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 300px 140px,#dbe7ff 50%,transparent 51%),radial-gradient(1px 1px at 180px 300px,#fff 50%,transparent 51%);
+  background-size:371px 397px;
+  -webkit-mask:linear-gradient(180deg,#000 0%,#000 50%,transparent 78%);mask:linear-gradient(180deg,#000 0%,#000 50%,transparent 78%);
+  opacity:.35;animation:twinkle 9s ease-in-out infinite reverse;will-change:opacity}
+@keyframes twinkle{50%{opacity:.85}}
+/* ===== รูปจริง (img) ในการ์ด/หน้ารายละเอียด ===== */
+.slide .art img,.cover img,.thumb img,.feature .media img{width:100%;height:100%;object-fit:cover;display:block}
+/* การ์ดที่เป็นโปสเตอร์ (มีตัวหนังสือในรูปอยู่แล้ว): ซ่อนชื่อ/คำบรรยาย/เงามืด ไม่ให้ทับกัน */
+.slide.poster .art img{object-position:50% 12%}
+.slide.poster .art::after{background:linear-gradient(180deg,transparent 78%,rgba(0,0,0,.55) 100%)}
+.slide.poster .ttl,.slide.poster .sub,.slide.poster .num{display:none}
+/* หน้า About: แสดงโปสเตอร์เต็มใบ ไม่ครอป */
+.feature .media.poster{aspect-ratio:auto;overflow:visible;display:flex;justify-content:center;align-items:center}
+.feature .media.poster img{width:auto;height:auto;max-width:100%;max-height:min(82vh,760px);object-fit:contain;border-radius:22px;box-shadow:0 40px 80px -30px rgba(0,0,0,.9)}
+/* ===== หน้า About (กดการ์ด 01) ===== */
+.feature.about{grid-template-columns:minmax(0,1fr) auto;gap:36px;padding:26px 34px;align-items:center}
+.about h2{font-size:clamp(24px,2.3vw,36px);line-height:1.1;margin:12px 0 14px;max-width:720px}
+.ab-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.ab-tabs button{position:relative;padding:8px 14px 10px;font-size:13.5px;font-weight:600;color:var(--muted);transition:color .2s}
+.ab-tabs button:hover,.ab-tabs button.on{color:var(--text)}
+.ab-tabs button.on::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:2px;border-radius:2px;background:var(--acc,#e8b53e)}
+.ab-panels{display:grid}
+.ab-p{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .35s,transform .35s,visibility 0s .35s}
+.ab-p.on{opacity:1;visibility:visible;transform:none;transition:opacity .35s,transform .35s}
+.ab-p>p{color:#aab5cc;font-size:14px;line-height:1.65;margin-bottom:10px;max-width:720px}
+.ab-meta{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.ab-meta h4,.vm-c span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--acc,#e8b53e);font-weight:700;margin-bottom:7px}
+.ab-meta p{font-size:13px;line-height:1.55;color:#aab5cc}
+.ab-chips{display:flex;flex-wrap:wrap;gap:6px}
+.ab-chips span{font-size:12px;border:1px solid #24365c;background:#0b1630;color:#c9d3e6;padding:5px 10px;border-radius:99px}
+.tl{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tl li{padding:11px 13px;border:1px solid var(--line);border-radius:14px;background:rgba(11,22,48,.5);font-size:12.5px;line-height:1.5;color:#aab5cc}
+.tl li b{display:block;font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-size:18px;color:var(--acc,#e8b53e);margin-bottom:4px}
+.tl li strong{color:var(--text);font-weight:600}
+.tl li.now{border-color:var(--acc,#e8b53e);box-shadow:0 0 30px -12px var(--acc,#e8b53e)}
+.vm{display:grid;gap:12px}
+.vm-c{padding:18px 22px;border:1px solid var(--line);border-left:3px solid var(--acc,#e8b53e);border-radius:14px;background:rgba(11,22,48,.5)}
+.vm-c span{display:block}
+.vm-c p{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-size:clamp(16px,1.4vw,20px);font-weight:700;line-height:1.35;color:var(--text)}
+.about .stats{margin:16px 0 16px;max-width:none}
+.about .stat{padding:10px 14px}.about .stat b{font-size:22px}
+.about .btns{margin-bottom:0}
+.feature.about .media.poster img{max-height:min(calc(100vh - 160px),720px);max-width:min(372px,28vw)}
+/* ปุ่ม Back ให้กินที่น้อยลง */
+.back{flex-direction:row;gap:10px;padding:10px 20px 6px}
+.back i{width:38px;height:38px}
+.detail-in{padding:6px 28px 18px}
+@media (max-width:900px){.feature.about{grid-template-columns:1fr;padding:22px}.feature.about .media.poster img{max-width:100%}.tl,.ab-meta{grid-template-columns:1fr}.ab-tabs{overflow-x:auto}.ab-tabs button{white-space:nowrap}}
+/* ===== กรอบรูปเรืองแสง (หน้า About) ===== */
+.feature .media.poster.glowframe{position:relative;padding:3px;border-radius:25px;overflow:hidden;isolation:isolate;cursor:pointer;background:#14254a;justify-self:center;
+  box-shadow:0 0 40px -6px rgba(232,181,62,.45),0 0 110px -24px rgba(47,155,255,.55);transition:box-shadow .35s,transform .35s}
+.glowframe .gf-ring{position:absolute;inset:-60%;z-index:-1;background:conic-gradient(from 0deg,transparent 0 50%,rgba(232,181,62,.2) 58%,#e8b53e 68%,#fff2c2 72%,#5fb4ff 80%,transparent 92%);animation:gfspin 6s linear infinite}
+@keyframes gfspin{to{transform:rotate(360deg)}}
+.feature .media.poster.glowframe img{border-radius:22px;box-shadow:none}
+.feature .media.poster.glowframe:hover{transform:translateY(-4px);box-shadow:0 0 60px -4px rgba(232,181,62,.7),0 0 140px -20px rgba(47,155,255,.75)}
+.gf-hint{position:absolute;left:50%;bottom:16px;transform:translate(-50%,6px);z-index:2;white-space:nowrap;font-size:12px;font-weight:600;letter-spacing:.04em;
+  padding:8px 14px;border-radius:99px;background:rgba(3,7,20,.85);border:1px solid rgba(232,181,62,.55);color:#f6e4b0;opacity:.85;transition:opacity .3s,transform .3s}
+.glowframe:hover .gf-hint{opacity:1;transform:translate(-50%,0)}
+/* ===== ชี้ตรงไหน กรอบนั้นมีแสง ===== */
+.detail .stat,.detail .tl li,.detail .vm-c,.detail .ab-chips span,.detail .box,.detail .chip,.detail .soon-card,.detail .cover,.office{
+  transition:border-color .25s,box-shadow .25s,transform .25s,background-color .25s}
+.detail .stat:hover,.detail .tl li:hover,.detail .vm-c:hover,.detail .box:hover,.detail .soon-card:hover,.office:hover{
+  border-color:var(--acc,#e8b53e);box-shadow:0 0 0 1px var(--acc,#e8b53e),0 0 34px -8px var(--acc,#e8b53e);transform:translateY(-2px)}
+.detail .ab-chips span:hover,.detail .chip:hover{border-color:var(--acc,#e8b53e);box-shadow:0 0 18px -4px var(--acc,#e8b53e);color:#fff}
+.detail .cover:hover{box-shadow:0 0 0 1px var(--acc,#e8b53e),0 0 44px -8px var(--acc,#e8b53e)}
+/* ===== ป๊อปอัปสาขา ===== */
+.offices{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:20px;visibility:hidden;opacity:0;transition:opacity .35s,visibility 0s linear .35s}
+.offices.open{visibility:visible;opacity:1;transition:opacity .35s}
+.of-bg{position:absolute;inset:0;background:rgba(1,4,14,.72);backdrop-filter:blur(8px)}
+.of-box{position:relative;width:min(1080px,100%);max-height:calc(100vh - 40px);overflow-y:auto;overscroll-behavior:contain;border-radius:26px;padding:30px 30px 26px;
+  background:radial-gradient(700px 220px at 50% 0%,rgba(232,181,62,.16),transparent 70%),linear-gradient(180deg,#0b1834,#060f24);
+  border:1px solid rgba(232,181,62,.35);box-shadow:0 40px 120px -20px rgba(0,0,0,.9),0 0 80px -30px rgba(232,181,62,.5);
+  transform:translateY(20px) scale(.97);transition:transform .45s cubic-bezier(.2,.9,.2,1)}
+.offices.open .of-box{transform:none}
+.of-x{position:absolute;top:14px;right:16px;width:38px;height:38px;border-radius:50%;font-size:22px;line-height:1;color:var(--muted);border:1px solid var(--line);transition:.2s}
+.of-x:hover{color:#fff;border-color:#e8b53e;box-shadow:0 0 18px -4px #e8b53e}
+.of-head{text-align:center;margin-bottom:22px}
+.of-eye{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#e8b53e;font-weight:700}
+.of-head h3{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-weight:800;font-size:clamp(24px,2.6vw,34px);margin:8px 0 6px;letter-spacing:-.01em}
+.of-head h3 em{font-style:normal;color:#e8b53e}
+.of-head p{color:var(--muted);font-size:14px}
+.of-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.office{--acc:#e8b53e;border:1px solid var(--line);border-radius:16px;padding:16px 16px 14px;background:rgba(11,22,48,.6);display:flex;flex-direction:column;gap:10px}
+.office.hq{border-color:rgba(232,181,62,.6);background:linear-gradient(180deg,rgba(232,181,62,.09),rgba(11,22,48,.6))}
+.of-top{display:flex;align-items:center;gap:10px}
+.of-top .cc{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:800;letter-spacing:.04em;color:#0b1630;background:linear-gradient(135deg,#f6dc8e,#c9952a)}
+.of-top b{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-size:16px;letter-spacing:.02em;text-transform:uppercase}
+.of-top i{font-style:normal;font-size:10px;font-weight:800;letter-spacing:.12em;color:#0b1630;background:#e8b53e;padding:3px 7px;border-radius:5px}
+.of-line+.of-line{padding-top:10px;border-top:1px dashed var(--line)}
+.of-lbl{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#e8b53e;font-weight:700;margin-bottom:3px}
+.of-line p{font-size:13px;line-height:1.55;color:#aab5cc}
+.of-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.of-links a{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:6px 10px;border-radius:99px;border:1px solid #24365c;background:#0b1630;color:#dfe6f3;transition:.2s}
+.of-links a:hover{border-color:#e8b53e;color:#fff;box-shadow:0 0 16px -4px #e8b53e}
+.of-links a.wa{border-color:rgba(37,211,102,.45);color:#b8f5cf}.of-links a.wa:hover{border-color:#25d366;box-shadow:0 0 16px -4px #25d366}
+.of-links a.map{color:var(--muted)}
+.of-foot{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:22px}
+@media (max-width:900px){.of-grid{grid-template-columns:1fr}.of-box{padding:24px 16px 18px}}
+/* ===== ประหยัดเครื่อง: ซ่อน/หยุดสิ่งที่มองไม่เห็น ===== */
+.hero{transition:visibility 0s}
+body.viewing .hero{visibility:hidden;transition:visibility 0s linear .75s}
+body.viewing .hero,body.viewing .hero *{animation-play-state:paused!important}
+body.of-open .detail,body.of-open .detail *{animation-play-state:paused!important}
+.feature.about .media.poster.glowframe{width:auto}
+</style>
+</head>
+<body>
+<!-- ================= INTRO TITLE (วิดีโอ) ================= -->
+<div id="intro" aria-label="ASSURICH intro">
+  <video class="vid" src="assurich_intro_smooth.mp4" muted playsinline preload="auto"></video>
+  <button class="snd" type="button" aria-label="เปิดเสียง">🔇 SOUND</button>
+  <button class="skip" type="button">SKIP ›</button>
+</div>
+<script>
+(function(){
+  var el=document.getElementById('intro'),b=document.body,v=el.querySelector('.vid'),snd=el.querySelector('.snd'),seen=false;
+  try{seen=sessionStorage.getItem('introSeen')==='1'}catch(e){}
+  if(seen||matchMedia('(prefers-reduced-motion: reduce)').matches){el.remove();return}
+  var PREP=1.5, OUT=0.75; /* วินาทีก่อนวิดีโอจบ: เริ่มเตรียมหน้าเว็บ / เริ่มเปลี่ยนฉาก */
+  b.classList.add('intro-lock');
+  var prepped=false,done=false,t;
+  function prep(){if(prepped)return;prepped=true;b.classList.add('intro-prep');b.classList.remove('intro-lock')}
+  function end(){if(done)return;done=true;clearTimeout(t);prep();
+    requestAnimationFrame(function(){requestAnimationFrame(function(){ /* ให้หน้าเว็บวาดเสร็จก่อน 1 เฟรม แล้วค่อยเริ่ม */
+      el.classList.add('out');b.classList.remove('intro-prep');b.classList.add('intro-done');
+      dispatchEvent(new Event('introdone'));
+    })});
+    try{sessionStorage.setItem('introSeen','1')}catch(e){}
+    setTimeout(function(){
+      var fade=setInterval(function(){v.volume=Math.max(0,v.volume-.1);if(v.volume<=0){clearInterval(fade);v.pause()}},60);
+    },200);
+    setTimeout(function(){v.pause();el.remove()},1800)}
+  (function watch(){ /* ตามเวลาวิดีโอแบบละเอียดทุกเฟรม */
+    if(done)return;
+    var d=v.duration;
+    if(d&&!v.paused){var left=d-v.currentTime;if(left<=PREP)prep();if(left<=OUT)end()}
+    requestAnimationFrame(watch)})();
+  v.addEventListener('ended',end);
+  v.addEventListener('error',end);
+  t=setTimeout(end,9000); /* กันค้าง: ถ้าวิดีโอโหลดช้า/ไม่เล่น ข้ามไปหน้าเว็บ */
+  function go(){var p=v.play();if(p&&p.catch)p.catch(end)}
+  if(v.readyState>=4)go();else v.addEventListener('canplaythrough',go,{once:true});
+  snd.addEventListener('click',function(e){e.stopPropagation();v.muted=!v.muted;snd.textContent=v.muted?'🔇 SOUND':'🔊 SOUND'});
+  el.addEventListener('click',end);
+  addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Enter'){end()}});
+})();
+</script>
+<div class="wm">AVISION · Rev3</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <canvas id="fx"></canvas>
+  <div class="rays"></div>
+  <div class="glow"></div>
+  <div class="bigword" id="bigword">About</div>
+  <div class="brand">ASSURICH<span>.</span></div>
+  <div class="status"><i class="dot"></i><b>Now serving ASEAN</b> · 43+ years of industrial solutions</div>
+
+  <div class="stage" id="stage"><div class="track" id="track"></div></div>
+
+  <div class="hint">Click any card to browse. Tap the card in the middle to explore.</div>
+  <div class="ctrl">
+    <button id="prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="counter" id="counter"><b>01</b> / 06</div>
+    <button id="next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+  </div>
+  <div class="prog"><i id="progbar"></i></div>
+  <div class="marquee"><div class="mq" id="mq"></div></div>
+</section>
+
+<!-- ================= DETAIL ================= -->
+<section class="detail" id="detail" aria-hidden="true">
+  <button class="back" id="backBtn" type="button" aria-label="Back to cards"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></i>Back</button>
+  <div class="detail-in" id="detailIn"></div>
+</section>
+
+<footer>
+  <div class="in">
+    <div><b>ASSURICH</b><br><br>Assurich Industries Pte Ltd<br>9 Tagore Lane #04-28, 9@Tagore, Singapore 787472</div>
+    <div>Thailand Branch<br>69/5 11/1 Soi, Sukhaphiban 2 Rd, Prawet, Bangkok 10250<br>Tel +66 2 029 9378</div>
+    <div>Singapore · Malaysia · Indonesia<br>Vietnam · Philippines · Thailand</div>
+  </div>
+</footer>
+
+<!-- ================= SUPPORT ================= -->
+<button class="support-tab" id="supBtn" aria-label="Customer support">
+  <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1v-6h3zM3 19a2 2 0 002 2h1v-6H3z"/></svg></span>
+  <span class="vt">Customer Support</span>
+</button>
+<div class="support-panel" id="supPanel">
+  <button class="sp-close" id="supClose">×</button>
+  <h4>Customer Support</h4>
+  <p>Talk to our technical & after-sales team in 6 ASEAN countries.</p>
+  <div class="sp-row"><span>Thailand</span><span>+66 2 029 9378</span></div>
+  <div class="sp-row"><span>Singapore</span><span>+65 6459 1069</span></div>
+  <div class="sp-row"><span>WhatsApp</span><span>+65 9818 3419</span></div>
+  <div class="sp-row"><span>Email</span><span>sales@assurich.com</span></div>
+  <a class="btn red" style="margin-top:14px;width:100%;justify-content:center" href="https://www.assurich.com/en/">Request a callback →</a>
+</div>
+
+
+<!-- ================= OFFICES POPUP ================= -->
+<div class="offices" id="offices" role="dialog" aria-modal="true" aria-label="Our offices across ASEAN" aria-hidden="true">
+  <div class="of-bg" data-ofclose></div>
+  <div class="of-box">
+    <button class="of-x" type="button" data-ofclose aria-label="Close">×</button>
+    <div class="of-head">
+      <span class="of-eye">Contact us</span>
+      <h3>Our offices across <em>ASEAN</em></h3>
+      <p>Talk to our sales, engineering and after-sales teams near you.</p>
+    </div>
+    <div class="of-grid" id="ofGrid"></div>
+    <div class="of-foot">
+      <a class="btn ghost" href="mailto:sales@assurich.com"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>sales@assurich.com</a>
+      <a class="btn red" href="https://www.assurich.com" target="_blank" rel="noopener">More information at www.assurich.com →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- ART (inline SVG, swap with real photos later) ---------- */
+const ART = {
+about:`<img src="images/about.jpg" alt="ASSURICH — 43 Years of Trust, Innovation & Industrial Excellence, Since 1983" loading="eager" decoding="async">`,
+aboutMap:`<img src="images/about-offices.jpg" alt="ASSURICH Industries Pte Ltd — offices across ASEAN since 1983" decoding="async">`,
+robot:`<svg viewBox="0 0 300 470" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1d2a33"/><stop offset="1" stop-color="#0c1014"/></linearGradient><linearGradient id="gm" x1="0" x2="1"><stop offset="0" stop-color="#f3f4f6"/><stop offset="1" stop-color="#9aa3ad"/></linearGradient></defs><rect width="300" height="470" fill="url(#gr)"/><g stroke="#2d3d48" stroke-width="1">${Array.from({length:12},(_,i)=>`<line x1="0" y1="${360+i*10}" x2="300" y2="${330+i*14}"/>`).join('')}</g><circle cx="230" cy="90" r="80" fill="#3fa9ff" opacity=".12"/><rect x="95" y="355" width="90" height="26" rx="6" fill="#2a3640"/><rect x="112" y="320" width="56" height="40" rx="10" fill="url(#gm)"/><g stroke-linecap="round"><line x1="140" y1="325" x2="105" y2="210" stroke="url(#gm)" stroke-width="30"/><line x1="105" y1="210" x2="200" y2="150" stroke="url(#gm)" stroke-width="24"/><line x1="200" y1="150" x2="215" y2="205" stroke="url(#gm)" stroke-width="16"/></g><circle cx="140" cy="325" r="20" fill="#e3141f"/><circle cx="105" cy="210" r="18" fill="#e3141f"/><circle cx="200" cy="150" r="14" fill="#e3141f"/><rect x="204" y="205" width="22" height="16" rx="3" fill="#cfd5db"/><path d="M206 221v14M224 221v14" stroke="#cfd5db" stroke-width="4"/><rect x="180" y="248" width="70" height="44" rx="4" fill="#ffb648" opacity=".9"/><rect x="180" y="248" width="70" height="10" fill="#d48a20" opacity=".9"/></svg>`,
+erw:`<svg viewBox="0 0 300 470" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="ge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b1a12"/><stop offset="1" stop-color="#0e0907"/></linearGradient><linearGradient id="gc" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#e9e2d6"/><stop offset=".5" stop-color="#8b8279"/><stop offset="1" stop-color="#d9d1c4"/></linearGradient></defs><rect width="300" height="470" fill="url(#ge)"/><circle cx="150" cy="235" r="150" fill="#ff7a2a" opacity=".1"/><rect x="10" y="226" width="280" height="18" rx="9" fill="url(#gc)"/>${[40,95,150,205,260].map((x,i)=>`<rect x="${x-14}" y="${i%2?186:214}" width="28" height="60" rx="7" fill="url(#gc)" opacity=".95"/><circle cx="${x}" cy="${i%2?196:274}" r="16" fill="url(#gc)"/>`).join('')}<g fill="#ff8a3a" opacity=".85">${Array.from({length:26},(_,i)=>`<circle cx="${150+Math.cos(i)*((i*9)%90+20)}" cy="${300+Math.sin(i*1.7)*30+i*2}" r="${1+(i%3)}"/>`).join('')}</g></svg>`,
+onsite:`<svg viewBox="0 0 300 470" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="go" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a5560"/><stop offset=".6" stop-color="#1f262d"/><stop offset="1" stop-color="#0d1013"/></linearGradient></defs><rect width="300" height="470" fill="url(#go)"/><g stroke="#ffcf3f" stroke-width="10" opacity=".85"><line x1="0" y1="440" x2="60" y2="380"/><line x1="40" y1="470" x2="120" y2="390"/></g><circle cx="150" cy="235" r="110" fill="#2b3338" stroke="#6c777f" stroke-width="10"/>${Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;return `<circle cx="${150+Math.cos(a)*92}" cy="${235+Math.sin(a)*92}" r="7" fill="#8a949b"/>`}).join('')}<circle cx="150" cy="235" r="62" fill="#111" stroke="#bfc6cc" stroke-width="3"/><rect x="142" y="60" width="16" height="190" fill="#d9dee2"/><rect x="118" y="40" width="64" height="38" rx="6" fill="#e3141f"/><rect x="132" y="228" width="36" height="12" rx="3" fill="#ffcf3f"/></svg>`,
+valves:`<svg viewBox="0 0 300 470" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="gv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a3a22"/><stop offset="1" stop-color="#2a120b"/></linearGradient><linearGradient id="gb" x1="0" x2="1"><stop offset="0" stop-color="#d8dde2"/><stop offset=".5" stop-color="#7d868e"/><stop offset="1" stop-color="#c5ccd2"/></linearGradient></defs><rect width="300" height="470" fill="url(#gv)"/><rect x="0" y="262" width="300" height="46" fill="url(#gb)" opacity=".7"/><rect x="58" y="250" width="22" height="70" rx="4" fill="url(#gb)"/><rect x="220" y="250" width="22" height="70" rx="4" fill="url(#gb)"/><path d="M80 255h140v60H80z" fill="#c8202a"/><ellipse cx="150" cy="285" rx="60" ry="44" fill="#e3141f"/><rect x="140" y="160" width="20" height="90" fill="url(#gb)"/><circle cx="150" cy="150" r="58" fill="none" stroke="#e3141f" stroke-width="12"/>${[0,1,2].map(i=>`<line x1="${150+Math.cos(i*Math.PI/3)*58}" y1="${150+Math.sin(i*Math.PI/3)*58}" x2="${150-Math.cos(i*Math.PI/3)*58}" y2="${150-Math.sin(i*Math.PI/3)*58}" stroke="#e3141f" stroke-width="7"/>`).join('')}<circle cx="150" cy="150" r="13" fill="#b5bcc2"/></svg>`,
+care:`<svg viewBox="0 0 300 470" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="gk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14343a"/><stop offset="1" stop-color="#081416"/></linearGradient></defs><rect width="300" height="470" fill="url(#gk)"/><g stroke="#1f4a50">${Array.from({length:14},(_,i)=>`<line x1="${i*24}" y1="0" x2="${i*24}" y2="470"/><line x1="0" y1="${i*36}" x2="300" y2="${i*36}"/>`).join('')}</g><path d="M150 120l80 30v70c0 60-40 100-80 118-40-18-80-58-80-118v-70z" fill="#0f2a2e" stroke="#4fd1c5" stroke-width="4"/><path d="M120 230l22 22 40-50" fill="none" stroke="#4fd1c5" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 320h50l14-26 18 52 16-34h122" fill="none" stroke="#e3141f" stroke-width="4"/></svg>`
+};
+
+/* ---------- DATA ---------- */
+const SLIDES = [
+ {key:'about', poster:true, title:'About Assurich', word:'Assurich', acc:'#e8b53e', sub:'43+ years · 6 countries', tag:'01'},
+ {key:'robot', title:'Robot A1', word:'Robot A1', acc:'#2f9bff', sub:'Cobots & material handling', tag:'PILLAR 1'},
+ {key:'erw', title:'ERW', word:'ERW', acc:'#ff5a1f', sub:'Engine rebuilding equipment', tag:'PILLAR 2'},
+ {key:'onsite', title:'On-Site', word:'On-Site', acc:'#ffc928', sub:'On-site machining tools', tag:'PILLAR 3'},
+ {key:'valves', title:'Valves', word:'Valves', acc:'#e3141f', sub:'Industrial valve shop', tag:'PILLAR 4 · SHOP'},
+ {key:'care', title:'Robocare', word:'Robocare', acc:'#2fd6c4', sub:'Center care · coming soon', tag:'PILLAR 5'}
+];
+
+const L = (name, desc, url) => ({name, desc, url});
+const ROBOT_COBOT = [
+ L('CRP','Collaborative robot arms','https://www.crobotp-robot.com'),
+ L('IIMT','Cobot arms & automation cells','https://www.iimtcobot.com'),
+ L('GZCR','Industrial robot arms','https://www.hy1862.com'),
+ L('JATEN','Cobots for welding & handling','https://www.jtrobots.com'),
+ L('LANXIX','Robot solutions','')
+];
+const ROBOT_LIFT = [
+ L('Edmolift','Lift tables · Sweden','https://www.edmolift.com'),
+ L('Taiyu','Material handling',''),
+ L('Frezer','Industrial equipment',''),
+ L('Noblelift','Forklifts & warehouse equipment','https://www.noblelift.com')
+];
+const ERW = [
+ L('Rottler','Boring, honing & machining centers','https://www.rottlermfg.com'),
+ L('AZ','Crankshaft & camshaft grinders','https://www.azspa.it'),
+ L('Averrich','Engineering & service',''),
+ L('Utratachno','Engine rebuilding tools',''),
+ L('Kwi','Workshop equipment','')
+];
+
+/* ---------- helpers ---------- */
+const goBtn = (u,label='Website') => u
+  ? `<a class="go" href="${u}" target="_blank" rel="noopener">${label} ▶</a>`
+  : `<span class="go soon" title="Add URL">${label} ▶</span>`;
+const rows = (arr, cls='') => `<div class="rows">${arr.map((x,i)=>`
+  <div class="row"><span class="n">${String(i+1).padStart(2,'0')}</span>
+  <div><div class="nm">${x.name}</div><div class="ds">${x.desc}</div></div>${goBtn(x.url)}</div>`).join('')}</div>`;
+const cover = (key,t1,t2) => `<div class="cover">${ART[key]}<div class="ov"><div class="t1">${t1}</div><div class="t2">${t2}</div></div></div>`;
+const thumb = key => `<div class="thumb">${ART[key]}</div>`;
+
+/* ---------- PANES ---------- */
+const PANES = {
+about:()=>`
+ <div class="feature pane about">
+  <div class="ab-left">
+   <span class="badge">About</span>
+   <h2>Four decades of industrial know-how. <em>One trusted ASEAN partner.</em></h2>
+   <div class="ab-tabs" role="tablist">
+    <button class="on" data-tab="ov" role="tab">Overview</button>
+    <button data-tab="jr" role="tab">Our journey</button>
+    <button data-tab="vm" role="tab">Vision &amp; mission</button>
+   </div>
+   <div class="ab-panels">
+    <div class="ab-p on" data-p="ov">
+     <p>Founded in Singapore in 1983, ASSURICH Group began as an industrial and marine equipment distributor. More than 40 years on, we have become a trusted ASEAN partner for machinery, engineering solutions and after-sales support, serving factories, shipyards, mining, oil and gas and power plants across the region.</p>
+     <p>Our strength has always come from listening. Working closely with customers and international technology partners, we focus on real industrial needs and deliver solutions that are practical, reliable and built to last.</p>
+     <div class="ab-meta">
+      <div><h4>Where we are</h4><p>Headquartered in Singapore, with offices in Malaysia, Indonesia, Vietnam, Thailand and the Philippines for closer, more cohesive support.</p></div>
+      <div><h4>What we focus on</h4><div class="ab-chips"><span>Robotic Automation</span><span>Engine Rebuilding Equipment</span><span>On-Site Machining</span></div></div>
+     </div>
+    </div>
+    <div class="ab-p" data-p="jr">
+     <ol class="tl">
+      <li><b>1983</b><div><strong>Founded in Singapore.</strong> ASSURICH Industries begins its journey in industrial and marine equipment.</div></li>
+      <li><b>1990s</b><div><strong>Building expertise.</strong> We expand into engineering equipment and specialised machinery for Singapore's marine, fabrication and industrial sectors.</div></li>
+      <li><b>2000s</b><div><strong>Going regional.</strong> Our ASEAN presence grows across Malaysia, Indonesia, Vietnam, the Philippines and beyond.</div></li>
+      <li><b>2010s</b><div><strong>From products to solutions.</strong> On-site machining, engine rebuilding, hydraulics, pipe preparation, welding and turnkey engineering join our portfolio.</div></li>
+      <li><b>2020s</b><div><strong>Automation and technology.</strong> Industrial robotics, robotic welding, AGVs and smart manufacturing, backed by stronger digital platforms and global partnerships.</div></li>
+      <li class="now"><b>Today</b><div><strong>The next chapter.</strong> Four decades of experience, combined with robotics and AI-driven equipment, helping customers boost productivity and overcome manpower challenges.</div></li>
+     </ol>
+    </div>
+    <div class="ab-p" data-p="vm">
+     <div class="vm">
+      <div class="vm-c"><span>Our vision</span><p>To be a trusted ASEAN industrial solutions partner.</p></div>
+      <div class="vm-c"><span>Our mission</span><p>To serve with integrity, practical innovation and dependable support, creating lasting value for our customers, partners and people.</p></div>
+     </div>
+    </div>
+   </div>
+   <div class="stats">
+    <div class="stat"><b>43+</b><span>Years of experience</span></div>
+    <div class="stat"><b>6</b><span>ASEAN countries</span></div>
+    <div class="stat"><b>1-Stop</b><span>Sales &amp; service</span></div>
+   </div>
+   <div class="btns"><a class="btn red" href="#" data-go="1">Explore solutions →</a><button class="btn ghost" data-offices>Contact us</button></div>
+  </div>
+  <button class="media poster glowframe" type="button" data-offices aria-label="View our offices across ASEAN"><span class="gf-ring"></span>${ART.aboutMap}<span class="gf-hint">Click to view our offices</span></button>
+ </div>`,
+
+robot:()=>`
+ <div class="split pane">
+  ${cover('robot','ROBOT A1','Cobots · Lifting · Handling')}
+  <div>
+   <div class="eyebrow">Pillar 1</div>
+   <h1 class="big">Robot A1</h1>
+   <div class="meta"><span>ASSURICH</span><span>9 brands</span><span>Cobot + Material handling</span></div>
+   <div class="btns"><button class="btn red" data-sup>Get ROI quote</button><a class="btn ghost" href="#robot-boxes">See brands</a></div>
+   <p class="lead">We don't sell robots — we improve factory productivity. Ready-made cobot packages that retrofit to your existing machines, with clear payback and local support.</p>
+  </div>
+ </div>
+ <div class="boxes pane" id="robot-boxes" style="margin-top:40px">
+  <div class="box">
+   <div class="box-head">${thumb('robot')}<div><h3>Cobot Arms</h3><span class="tag">5 BRANDS</span><p>Welding · CNC tending · Pick &amp; place</p></div></div>
+   ${rows(ROBOT_COBOT)}
+  </div>
+  <div class="box">
+   <div class="box-head">${thumb('onsite')}<div><h3>Lifting &amp; Handling</h3><span class="tag">4 BRANDS</span><p>Lift tables · Forklifts · Warehouse</p></div></div>
+   ${rows(ROBOT_LIFT)}
+  </div>
+ </div>`,
+
+erw:()=>`
+ <div class="split pane">
+  ${cover('erw','ERW','Engine Rebuilding')}
+  <div>
+   <div class="eyebrow">Pillar 2</div>
+   <h1 class="big">ERW</h1>
+   <div class="meta"><span>ASSURICH</span><span>Engine rebuilding</span><span>5 brands</span></div>
+   <div class="btns"><button class="btn red" data-sup>Talk to an engineer</button><a class="btn ghost" href="#erw-list">Explore the brands</a></div>
+   <div id="erw-list">${rows(ERW)}</div>
+  </div>
+ </div>`,
+
+onsite:()=>`
+ <div class="split pane">
+  ${cover('onsite','ON-SITE','Machining where the machine is')}
+  <div>
+   <div class="eyebrow">Pillar 3</div>
+   <h1 class="big">On-Site</h1>
+   <div class="meta"><span>ASSURICH</span><span>Boring · Milling · Flange facing</span></div>
+   <div class="btns"><button class="btn red" data-sup>Book a site survey</button><a class="btn ghost" href="#onsite-boxes">See brands</a></div>
+   <p class="lead">Portable machine tools that repair large equipment in place — no dismantling, no shipping, less downtime for shipyards, power plants, mining and oil &amp; gas.</p>
+  </div>
+ </div>
+ <div class="boxes pane" id="onsite-boxes" style="margin-top:40px">
+  <div class="box">
+   <div class="box-head">${thumb('onsite')}<div><h3>Insitools</h3><span class="tag">ON-SITE MACHINING</span><p>Line boring · Flange facing · Milling</p></div></div>
+   <div class="box-foot"><p>Portable line boring and bore welding machines, flange facers and milling machines for in-place repair.</p>
+    <div class="chips"><span class="chip">Line boring</span><span class="chip">Bore welding</span><span class="chip">Flange facing</span><span class="chip">Milling</span></div>
+    <a class="btn red" href="https://www.insitools.com" target="_blank" rel="noopener">Visit Insitools →</a></div>
+  </div>
+  <div class="box">
+   <div class="box-head">${thumb('erw')}<div><h3>UROmac</h3><span class="tag">ON-SITE MACHINING</span><p>Portable machine tools</p></div></div>
+   <div class="box-foot"><p>Portable machining solutions for heavy industry — accurate results directly on site.</p>
+    <div class="chips"><span class="chip">Portable</span><span class="chip">Heavy industry</span><span class="chip">Field service</span></div>
+    <span class="btn red go soon" style="padding:13px 22px">Visit UROmac →</span></div>
+  </div>
+ </div>`,
+
+valves:()=>`
+ <div class="feature pane">
+  <div class="media">${ART.valves}</div>
+  <div>
+   <span class="badge">Shop</span>
+   <h2>Industrial Valves <em>in stock.</em></h2>
+   <p class="lead">Gate, ball, butterfly and control valves for marine, oil &amp; gas and process plants — ready to ship across ASEAN.</p>
+   <div class="btns" style="margin-top:28px"><button class="btn red" data-sup>Shop valves →</button></div>
+  </div>
+ </div>`,
+
+care:()=>`
+ <div class="soon-card pane">
+  <span class="badge">06 · Coming soon</span>
+  <h2>Robocare Center</h2>
+  <p class="lead" style="margin:0 auto">Service, maintenance and spare parts for every robot we install.</p>
+ </div>`
+};
+
+/* ---------- CAROUSEL ---------- */
+const track = document.getElementById('track');
+const counter = document.getElementById('counter');
+const N = SLIDES.length;
+let cur = 0;
+
+SLIDES.forEach((s,i)=>{
+  const el = document.createElement('div');
+  el.className='slide'+(s.poster?' poster':'');
+  el.classList.add('enter');
+  el.innerHTML = `<div class="inner"><div class="shine"></div><div class="art">${ART[s.key]}</div><div class="num">${s.tag}</div><div class="ttl">${s.title}</div><div class="sub">${s.sub}</div><div class="cta">▶ Explore</div></div>`;
+  el.addEventListener('click',()=>{ if(dragMoved) return; if(i===cur) openPane(i,true); else go(i); });
+  track.appendChild(el);
+});
+const slides=[...track.children];
+
+function layout(){
+  const w = Math.min(window.innerWidth,1500);
+  const gap = Math.max(140, Math.min(w*0.2, window.innerHeight*0.34));
+  slides.forEach((el,i)=>{
+    let d = i-cur;
+    if(d > N/2) d -= N; if(d < -N/2) d += N;
+    const ad = Math.abs(d);
+    const x = d*gap - (ad>1 ? Math.sign(d)*gap*0.32*(ad-1) : 0);
+    const rot = -d*28;
+    const sc = ad===0 ? 1.12 : 1-ad*0.12;
+    const z = -ad*140;
+    el.style.transform = `translate(-50%,-50%) translateX(${x}px) translateZ(${z}px) rotateY(${rot}deg) scale(${sc})`;
+    el.style.opacity = ad>2 ? 0 : 1;
+    el.style.filter = ad===0 ? 'none' : `brightness(${1-ad*0.22})`;
+    el.style.zIndex = 10-ad;
+    el.style.pointerEvents = ad>2 ? 'none':'auto';
+    el.classList.toggle('active', ad===0);
+  });
+  const S=SLIDES[cur];
+  document.documentElement.style.setProperty('--acc',S.acc);
+  const bw=document.getElementById('bigword');
+  if(bw.dataset.k!==S.key){bw.dataset.k=S.key;bw.textContent=S.word;bw.classList.remove('pop');void bw.offsetWidth;bw.classList.add('pop');}
+  counter.innerHTML = `<b>${String(cur+1).padStart(2,'0')}</b> / ${String(N).padStart(2,'0')}`;
+}
+function go(i){ cur=(i+N)%N; layout(); openPane(cur,false); }
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('next').onclick=()=>go(cur+1);
+window.addEventListener('resize',layout);
+document.addEventListener('keydown',e=>{ if(e.key==='ArrowLeft')go(cur-1); if(e.key==='ArrowRight')go(cur+1); });
+
+/* drag / swipe */
+let sx=null, dragMoved=false;
+const stage=document.getElementById('stage');
+stage.addEventListener('pointerdown',e=>{sx=e.clientX;dragMoved=false;});
+window.addEventListener('pointerup',e=>{
+  if(sx===null)return; const dx=e.clientX-sx; sx=null;
+  if(Math.abs(dx)>40){dragMoved=true; go(cur+(dx<0?1:-1)); setTimeout(()=>dragMoved=false,50);}
+});
+
+/* ---------- DETAIL ---------- */
+const detail=document.getElementById('detail'), detailIn=document.getElementById('detailIn');
+const isViewing=()=>document.body.classList.contains('viewing');
+function openPane(i,show){
+  detailIn.innerHTML = PANES[SLIDES[i].key]();
+  detailIn.querySelectorAll('[data-sup]').forEach(b=>b.onclick=openSup);
+  detailIn.querySelectorAll('[data-offices]').forEach(b=>b.onclick=openOffices);
+  detailIn.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{ /* แท็บในหน้า About */
+    const box=b.closest('.pane');
+    box.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('on',x===b));
+    box.querySelectorAll('[data-p]').forEach(x=>x.classList.toggle('on',x.dataset.p===b.dataset.tab));
+  });
+  detailIn.querySelectorAll('[data-go]').forEach(b=>b.onclick=e=>{e.preventDefault();closePane();go(+b.dataset.go);});
+  if(show) userTook=true;
+  if(show && !isViewing()){
+    detail.scrollTop=0; document.body.classList.add('viewing'); detail.setAttribute('aria-hidden','false');
+    try{history.pushState({pane:1},'')}catch(e){}
+    clearTimeout(timer); bar.classList.remove('run');
+  }
+}
+function closePane(fromHistory){
+  if(!isViewing())return;
+  document.body.classList.remove('viewing'); detail.setAttribute('aria-hidden','true');
+  if(!fromHistory){try{if(history.state&&history.state.pane)history.back()}catch(e){}}
+  restart();
+}
+document.getElementById('backBtn').onclick=()=>closePane();
+window.addEventListener('popstate',()=>closePane(true)); /* ปุ่มย้อนกลับของเบราว์เซอร์/มือถือ = กลับไปการ์ด */
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ if(offOpen())closeOffices(); else closePane(); } });
+
+
+/* ---------- OFFICES POPUP (ข้อมูลสาขา แก้ได้ที่นี่) ---------- */
+const OFFICES=[
+ {cc:'SG',name:'Singapore',hq:true,lines:[{addr:'9 Tagore Lane #04-28, 9@Tagore, Singapore 787472',tel:['+65 6459 1069']}]},
+ {cc:'MY',name:'Malaysia',lines:[{addr:'No. 79, Jalan Platinum 5/6, XME Business Park, Nilai 71800, Negeri Sembilan',wa:'+65 9818 3419'}]},
+ {cc:'ID',name:'Indonesia',lines:[{label:'Jakarta',addr:'Golden Boulevard Blk C No.16, BSD City',tel:['+62 21 5316 0697']},{label:'Balikpapan',addr:'Ruko Paladium Blk G.10, Grand City',tel:['+62 542 851 7857']}]},
+ {cc:'VN',name:'Vietnam',lines:[{addr:'3rd Floor, 41 Vu Pham Ham Street, Cau Giay Ward, Hanoi',tel:['+84 24 3200 4615']}]},
+ {cc:'TH',name:'Thailand',lines:[{addr:'69/5 Soi 11/1, Sukhaphiban 2 Road, Prawet, Bangkok 10250',tel:['+66 2 029 9378']}]},
+ {cc:'PH',name:'Philippines',lines:[{addr:'3/F La Aldea Commercial Bldg., McArthur Hwy, Tabang, Guiguinto 3016, Bulacan',tel:['+63 44 762 8362']}]}
+];
+const IC={
+ tel:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>',
+ wa:'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.8 11.9 11.9 0 004.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 001.8-1.3 2.3 2.3 0 00.2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>',
+ pin:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>'
+};
+const digits=t=>t.replace(/[^\d+]/g,'');
+document.getElementById('ofGrid').innerHTML=OFFICES.map(o=>`
+ <div class="office${o.hq?' hq':''}">
+  <div class="of-top"><span class="cc">${o.cc}</span><b>${o.name}</b>${o.hq?'<i>HQ</i>':''}</div>
+  ${o.lines.map(l=>`<div class="of-line">
+    ${l.label?`<span class="of-lbl">${l.label}</span>`:''}
+    <p>${l.addr}</p>
+    <div class="of-links">
+     ${(l.tel||[]).map(t=>`<a href="tel:${digits(t)}">${IC.tel}${t}</a>`).join('')}
+     ${l.wa?`<a class="wa" href="https://wa.me/${digits(l.wa).slice(1)}" target="_blank" rel="noopener">${IC.wa}${l.wa}</a>`:''}
+     <a class="map" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(l.addr+', '+o.name)}" target="_blank" rel="noopener">${IC.pin}Map</a>
+    </div></div>`).join('')}
+ </div>`).join('');
+const ofEl=document.getElementById('offices');
+const offOpen=()=>ofEl.classList.contains('open');
+function openOffices(){document.body.classList.add('of-open');ofEl.classList.add('open');ofEl.setAttribute('aria-hidden','false');}
+function closeOffices(){document.body.classList.remove('of-open');ofEl.classList.remove('open');ofEl.setAttribute('aria-hidden','true');}
+ofEl.querySelectorAll('[data-ofclose]').forEach(b=>b.onclick=closeOffices);
+
+/* ---------- SUPPORT ---------- */
+const sp=document.getElementById('supPanel');
+function openSup(){sp.classList.add('open');}
+document.getElementById('supBtn').onclick=()=>sp.classList.toggle('open');
+document.getElementById('supClose').onclick=()=>sp.classList.remove('open');
+
+layout(); openPane(0,false);
+
+/* ---------- BOOM: entrance ---------- */
+slides.forEach((el,i)=>setTimeout(()=>el.classList.remove('enter'),150+Math.abs(i-(i>N/2?N:0))*130));
+
+/* ---------- BOOM: tilt active card ---------- */
+stage.addEventListener('pointermove',e=>{
+  const a=slides[cur]; const r=a.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+  if(Math.abs(x)<.8&&Math.abs(y)<.8){a.style.setProperty('--ry',(x*16)+'deg');a.style.setProperty('--rx',(-y*12)+'deg');}
+});
+stage.addEventListener('pointerleave',()=>slides.forEach(s=>{s.style.setProperty('--rx','0deg');s.style.setProperty('--ry','0deg')}));
+
+/* ---------- BOOM: autoplay with progress ---------- */
+var bar=document.getElementById('progbar'), timer=null, paused=false, userTook=false;
+function restart(){clearTimeout(timer);bar.classList.remove('run');void bar.offsetWidth;
+  if(paused||userTook||isViewing()||/intro-(lock|prep)/.test(document.body.className))return; /* ไม่หมุนระหว่างเล่นไตเติล */ bar.classList.add('run'); timer=setTimeout(()=>{cur=(cur+1)%N;layout();openPane(cur,false);restart();},5000);}
+/* ลูกค้ากด/เลือกการ์ดเองแล้ว (userTook) = หยุดหมุนอัตโนมัติ การ์ดจะค้างอยู่ที่ใบที่เลือก */
+const _go=go; go=function(i){userTook=true;_go(i);restart();};
+stage.addEventListener('mouseenter',()=>{paused=true;restart();});
+stage.addEventListener('mouseleave',()=>{paused=false;restart();});
+restart();
+addEventListener('introdone',()=>{cur=0;layout();openPane(0,false);restart();}); /* จบไตเติล: เริ่มที่ About (01) ตรงกลาง */
+
+/* ---------- BOOM: marquee ---------- */
+const words=['Robotics','Cobot Arms','Engine Rebuilding','On-Site Machining','Industrial Valves','Robocare','43+ Years','6 ASEAN Countries'];
+const one=words.map(w=>`<span>${w}<b>✦</b></span>`).join('');
+document.getElementById('mq').innerHTML=one+one;
+
+/* ---------- BOOM: sparks ---------- */
+const cv=document.getElementById('fx'), cx=cv.getContext('2d'); let P=[];
+const DPR=Math.min(devicePixelRatio||1,1.5); /* จำกัดความละเอียด ไม่ให้หนักบนจอ 4K/มือถือ */
+function rs(){cv.width=cv.offsetWidth*DPR;cv.height=cv.offsetHeight*DPR;}
+rs(); window.addEventListener('resize',rs);
+function spawn(){const w=cv.width,h=cv.height;return{x:w/2+(Math.random()-.5)*w*.7,y:h*.9+Math.random()*h*.1,vx:(Math.random()-.5)*.4,vy:-(.4+Math.random()*1.4)*DPR,r:(Math.random()*1.8+.4)*DPR,l:0,m:200+Math.random()*260};}
+for(let i=0;i<60;i++){const p=spawn();p.l=Math.random()*p.m;P.push(p);}
+(function tick(){
+  if(document.hidden||/intro-(lock|prep)|viewing/.test(document.body.className)){requestAnimationFrame(tick);return} /* หยุดวาดประกายไฟระหว่างเล่นวิดีโอ */
+  cx.clearRect(0,0,cv.width,cv.height);
+  const acc=document.documentElement.style.getPropertyValue('--acc').trim()||'#e3141f'; /* อ่านค่าตรงๆ ไม่ต้องคำนวณ style ทั้งหน้าทุกเฟรม */
+  cx.globalCompositeOperation='lighter';
+  P.forEach((p,i)=>{p.x+=p.vx+Math.sin((p.l+i)*.02)*.3;p.y+=p.vy;p.l++;
+    const a=Math.sin(Math.PI*p.l/p.m);
+    cx.globalAlpha=a*.85;cx.fillStyle=i%3?acc:'#fff2d8';
+    cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fill();
+    if(p.l>p.m)P[i]=spawn();});
+  cx.globalAlpha=1;requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
