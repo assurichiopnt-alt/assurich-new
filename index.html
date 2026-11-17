@@ -32,6 +32,13 @@ h1,h2,h3,.disp{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;letter-spac
     linear-gradient(180deg,#01030c 0%,#030a1f 50%,#06112c 82%,var(--bg) 100%)}
 .brand{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-weight:900;font-size:clamp(22px,2.4vw,30px);letter-spacing:.12em}
 .brand span{color:var(--red)}
+.brand.logo-top{display:block;line-height:0;text-shadow:none!important;position:relative;z-index:3}
+.brand.logo-top img{display:block;height:clamp(112px,16.5vh,190px);width:auto;filter:drop-shadow(0 8px 22px rgba(0,0,0,.6)) drop-shadow(0 0 34px rgba(232,181,62,.32));transition:transform .4s cubic-bezier(.2,.8,.2,1),filter .4s}
+.brand.logo-top:hover img{transform:translateY(-2px) scale(1.03);filter:drop-shadow(0 6px 18px rgba(0,0,0,.55)) drop-shadow(0 0 30px rgba(232,181,62,.45))}
+.hero .status{margin-top:10px}
+.hero .brand.logo-top~.stage{margin-top:clamp(14px,2.6vh,34px);height:clamp(380px,52vh,560px)}
+.hero .brand.logo-top~.stage .slide{width:clamp(220px,min(21vw,30vh),330px)}
+.hero:has(.logo-top){padding-top:16px}
 .status{margin-top:14px;font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center}
 .status b{color:var(--text);font-weight:600}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(227,20,31,.6);animation:pulse 1.8s infinite}
@@ -457,7 +464,7 @@ body.of-open .detail,body.of-open .detail *{animation-play-state:paused!importan
   <div class="rays"></div>
   <div class="glow"></div>
   <div class="bigword" id="bigword">About</div>
-  <div class="brand">ASSURICH<span>.</span></div>
+  <a class="brand logo-top" href="#top" aria-label="ASSURICH"><img src="images/assurich-logo.png" alt="ASSURICH" width="340" height="280" decoding="async"></a>
   <div class="status"><i class="dot"></i><b>Now serving ASEAN</b> · 43+ years of industrial solutions</div>
 
   <div class="stage" id="stage"><div class="track" id="track"></div></div>
