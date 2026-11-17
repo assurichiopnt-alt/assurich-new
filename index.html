@@ -208,7 +208,11 @@ footer b{color:var(--text);font-family:Archivo,'Helvetica Neue',Arial,sans-serif
 #intro .vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:transparent;transform-origin:50% 45%;will-change:opacity,transform;
   transition:opacity 1.3s cubic-bezier(.45,0,.25,1),transform 1.6s cubic-bezier(.3,0,.2,1)}
 #intro.out .vid{opacity:0;transform:scale(1.12)}
-@media (orientation:portrait){#intro .vid{object-fit:contain}}
+@media (orientation:portrait){ /* มือถือแนวตั้ง: โชว์แถบกลางของคลิป (โลโก้อยู่กลางพอดี) ขอบบน-ล่างค่อยๆ จางเป็นดำ */
+  #intro .vid{inset:auto 0;top:calc(50% - min(31vh,68vw));height:min(62vh,136vw);object-fit:cover;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(180deg,transparent,#000 14%,#000 86%,transparent)}}
+#intro.still .vid{animation:introStill 2.6s ease-out both}
+@keyframes introStill{from{opacity:0;transform:scale(1.08)}25%{opacity:1}to{opacity:1;transform:scale(1)}}
 #intro .skip,#intro .snd{position:absolute;bottom:20px;z-index:4;font-size:12px;letter-spacing:.2em;color:var(--dim);border:1px solid var(--line);padding:8px 14px;border-radius:99px;background:rgba(0,0,0,.4);transition:color .2s,border-color .2s,opacity .4s}
 #intro .skip{right:20px}#intro .snd{left:20px}
 #intro .skip:hover,#intro .snd:hover{color:var(--text);border-color:var(--red)}
@@ -346,12 +350,45 @@ body.viewing .hero{visibility:hidden;transition:visibility 0s linear .75s}
 body.viewing .hero,body.viewing .hero *{animation-play-state:paused!important}
 body.of-open .detail,body.of-open .detail *{animation-play-state:paused!important}
 .feature.about .media.poster.glowframe{width:auto}
+/* ===== มือถือ (จอแคบ) ===== */
+@media (max-width:900px){
+  .split,.feature,.boxes,.feature.about{grid-template-columns:minmax(0,1fr)}
+  .split>*,.feature>*,.boxes>*{min-width:0}
+  .detail-in{padding:4px 12px 32px}
+  .feature,.feature.about{padding:20px 16px;border-radius:22px;gap:26px}
+  .ab-panels{display:block}
+  .ab-p{display:none;transform:none}
+  .ab-p.on{display:block}
+  .ab-tabs{margin-left:-4px;margin-right:-4px}
+  .ab-tabs button{padding:8px 10px 10px;font-size:13px}
+  .about h2{font-size:clamp(24px,7vw,30px)}
+  .about .stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .about .stat{padding:10px}
+  .about .stat b{font-size:19px}
+  .about .stat span{font-size:11px;line-height:1.3;display:block}
+  .about .btns .btn{flex:1 1 auto;justify-content:center}
+  .feature.about .media.poster.glowframe{width:100%;max-width:440px}
+  .feature.about .media.poster img{width:100%;max-width:100%;max-height:none}
+  .status{flex-wrap:wrap;justify-content:center;text-align:center;padding:0 16px;font-size:13px;row-gap:2px}
+  /* Customer Support: เปลี่ยนเป็นปุ่มกลมมุมขวาล่าง ไม่บังเนื้อหา */
+  .support-tab{top:auto;bottom:16px;right:14px;transform:none;width:52px;height:52px;padding:0;border-radius:50%;display:grid;place-items:center;
+    box-shadow:0 10px 30px -6px rgba(0,0,0,.7),0 0 0 3px rgba(227,20,31,.25)}
+  .support-tab .vt{display:none}
+  .support-tab .ic{width:36px;height:36px}
+  .support-panel{top:auto;bottom:80px;right:14px;transform:translateY(16px)}
+  .support-panel.open{transform:none}
+  .of-box{max-height:calc(100vh - 24px);border-radius:20px}
+  .offices{padding:12px}
+}
+/* แถบปุ่ม Back: มีพื้นหลังไล่สี ไม่ให้ตัวหนังสือที่เลื่อนผ่านมาทับ */
+.back{width:100%;justify-content:center;background:linear-gradient(180deg,#030a1f 0%,#030a1f 62%,rgba(3,10,31,0) 100%);padding-bottom:16px;margin-bottom:-10px}
+@media (max-width:900px){.wm{display:none}.detail-in{padding-bottom:90px}}
 </style>
 </head>
 <body>
 <!-- ================= INTRO TITLE (วิดีโอ) ================= -->
 <div id="intro" aria-label="ASSURICH intro">
-  <video class="vid" src="assurich_intro_smooth.mp4" muted playsinline preload="auto"></video>
+  <video class="vid" src="assurich_intro_smooth.mp4" poster="images/intro-poster.jpg" muted autoplay playsinline webkit-playsinline preload="auto"></video>
   <button class="snd" type="button" aria-label="เปิดเสียง">🔇 SOUND</button>
   <button class="skip" type="button">SKIP ›</button>
 </div>
@@ -382,8 +419,14 @@ body.of-open .detail,body.of-open .detail *{animation-play-state:paused!importan
   v.addEventListener('ended',end);
   v.addEventListener('error',end);
   t=setTimeout(end,9000); /* กันค้าง: ถ้าวิดีโอโหลดช้า/ไม่เล่น ข้ามไปหน้าเว็บ */
-  function go(){var p=v.play();if(p&&p.catch)p.catch(end)}
-  if(v.readyState>=4)go();else v.addEventListener('canplaythrough',go,{once:true});
+  /* มือถือ (โดยเฉพาะ iPhone) ไม่โหลดวิดีโอล่วงหน้า ต้องสั่งเล่นทันที ห้ามรอ canplaythrough */
+  var stillT;
+  function still(){ /* เล่นวิดีโอไม่ได้ (โหมดประหยัดแบต/เน็ตช้า): โชว์ภาพโลโก้จากคลิปแทน 2.6 วิ แล้วเข้าเว็บ */
+    if(done||stillT)return; clearTimeout(t); try{v.pause()}catch(e){}
+    el.classList.add('still'); stillT=setTimeout(end,2600)}
+  v.muted=true; v.defaultMuted=true;
+  var p=v.play(); if(p&&p.catch)p.catch(still);
+  setTimeout(function(){ if(!done&&v.currentTime<0.15)still() },3500); /* 3.5 วิแล้วยังไม่เริ่มเล่น */
   snd.addEventListener('click',function(e){e.stopPropagation();v.muted=!v.muted;snd.textContent=v.muted?'🔇 SOUND':'🔊 SOUND'});
   el.addEventListener('click',end);
   addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Enter'){end()}});
