@@ -183,6 +183,23 @@ footer{display:none}
 .box-head h3{font-size:22px;font-weight:800}
 .tag{display:inline-block;font-size:10.5px;font-weight:700;background:#24365c;color:#ddd;padding:3px 7px;border-radius:5px;margin:6px 0 4px;letter-spacing:.04em}
 .box-head p{font-size:12.5px;color:var(--muted)}
+.boxes.stack{grid-template-columns:minmax(0,1fr)!important;gap:20px;margin-top:30px}
+/* On-Site: รูปซ้ายกับคอลัมน์ขวาสูงเท่ากัน กล่องสองใบยืดเท่ากัน */
+@media (min-width:901px){
+ .split.even{align-items:stretch}
+ .split.even>div:last-child{display:flex;flex-direction:column}
+ .split.even .boxes.stack{flex:1;grid-auto-rows:1fr}
+ .split.even .box{display:flex;flex-direction:column}
+ .split.even .box-foot{flex:1;display:flex;flex-direction:column}
+ .split.even .box-foot .btn{margin-top:auto;align-self:flex-start}
+ .split.even .cover.flow{align-self:stretch;justify-self:center;width:auto;max-width:100%;height:auto;min-height:0}
+ .split.even .cover.flow img{object-position:50% 50%}
+}
+.split.even .box-head{min-height:96px}
+.box-head .thumb.wide svg{width:100%;height:100%;display:block}
+.box-head .thumb.wide{width:150px;height:46px;border-radius:9px;background:#3a3c40}
+.box-head .thumb.wide img{object-fit:contain}
+@media (max-width:560px){.box-head .thumb.wide{width:118px;height:36px}}
 .box-head.plain{padding:22px 24px 20px}
 .box-head.plain h3{font-size:clamp(22px,2vw,28px);letter-spacing:-.01em;line-height:1.1}
 .box-head.plain p{font-size:13.5px;margin-top:2px}
@@ -532,6 +549,7 @@ body.of-open .detail,body.of-open .detail *{animation-play-state:paused!importan
 /* ---------- ART (inline SVG, swap with real photos later) ---------- */
 const ART = {
 about:`<img src="images/about.jpg" alt="ASSURICH — 43 Years of Trust, Innovation & Industrial Excellence, Since 1983" loading="eager" decoding="async">`,
+onsiteCard:`<img src="images/insitools-card.jpg" alt="INSITOOLS — portable machining & welding solutions by Assurich" decoding="async">`,
 robotCard:`<img src="images/robot-a1-card.jpg" alt="ROBOT A1 — European industrial automation by Assurich Group" decoding="async">`,
 robotFlow:`<img src="images/robot-a1-flow.jpg" alt="ROBOT A1 — One smart factory, one seamless flow: welding, cobot picking, AGV transport, automated storage" decoding="async">`,
 aboutMap:`<img src="images/about-offices.jpg" alt="ASSURICH Industries Pte Ltd — offices across ASEAN since 1983" decoding="async">`,
@@ -547,7 +565,7 @@ const SLIDES = [
  {key:'about', poster:true, title:'About Assurich', word:'Assurich', acc:'#e8b53e', sub:'43+ years · 6 countries', tag:'01'},
  {key:'robot', art:'robotCard', poster:true, title:'Robot A1', word:'Robot A1', acc:'#2f9bff', sub:'Cobots & material handling', tag:'PILLAR 1'},
  {key:'erw', title:'ERW', word:'ERW', acc:'#ff5a1f', sub:'Engine rebuilding equipment', tag:'PILLAR 2'},
- {key:'onsite', title:'On-Site', word:'On-Site', acc:'#ffc928', sub:'On-site machining tools', tag:'PILLAR 3'},
+ {key:'onsite', art:'onsiteCard', poster:true, title:'On-Site', word:'On-Site', acc:'#ffc928', sub:'On-site machining tools', tag:'PILLAR 3'},
  {key:'valves', title:'Valves', word:'Valves', acc:'#e3141f', sub:'Industrial valve shop', tag:'PILLAR 4 · SHOP'},
  {key:'care', title:'Robocare', word:'Robocare', acc:'#2fd6c4', sub:'Center care · coming soon', tag:'PILLAR 5'}
 ];
@@ -675,28 +693,26 @@ erw:()=>`
  </div>`,
 
 onsite:()=>`
- <div class="split pane">
-  ${cover('onsite','ON-SITE','Machining where the machine is')}
+ <div class="split pane even">
+  <div class="cover flow">${ART.onsiteCard}</div>
   <div>
    <div class="eyebrow">Pillar 3</div>
    <h1 class="big">On-Site</h1>
    <div class="meta"><span>ASSURICH</span><span>Boring · Milling · Flange facing</span></div>
-   <div class="btns"><button class="btn red" data-sup>Book a site survey</button><a class="btn ghost" href="#onsite-boxes">See brands</a></div>
-   <p class="lead">Portable machine tools that repair large equipment in place — no dismantling, no shipping, less downtime for shipyards, power plants, mining and oil &amp; gas.</p>
-  </div>
- </div>
- <div class="boxes pane" id="onsite-boxes" style="margin-top:40px">
+   <div class="boxes stack" id="onsite-boxes">
   <div class="box">
-   <div class="box-head">${thumb('onsite')}<div><h3>Insitools</h3><span class="tag">ON-SITE MACHINING</span><p>Line boring · Flange facing · Milling</p></div></div>
-   <div class="box-foot"><p>Portable line boring and bore welding machines, flange facers and milling machines for in-place repair.</p>
+   <div class="box-head"><div class="thumb wide"><img src="images/brands/insitools.png" alt="INSITOOLS logo" loading="lazy"></div><div><h3>Insitools</h3><span class="tag">ON-SITE MACHINING</span></div></div>
+   <div class="box-foot"><p>INSITOOLS is a global leader in portable machining and welding solutions, empowering industries to perform complex on-site maintenance with minimal downtime. Our machines deliver workshop accuracy right to your field application.</p>
     <div class="chips"><span class="chip">Line boring</span><span class="chip">Bore welding</span><span class="chip">Flange facing</span><span class="chip">Milling</span></div>
     <a class="btn red" href="https://www.insitools.com" target="_blank" rel="noopener">Visit Insitools →</a></div>
   </div>
   <div class="box">
-   <div class="box-head">${thumb('erw')}<div><h3>UROmac</h3><span class="tag">ON-SITE MACHINING</span><p>Portable machine tools</p></div></div>
+   <div class="box-head"><div class="thumb wide">${ART.erw}</div><div><h3>UROmac</h3><span class="tag">ON-SITE MACHINING</span><p>Portable machine tools</p></div></div>
    <div class="box-foot"><p>Portable machining solutions for heavy industry — accurate results directly on site.</p>
     <div class="chips"><span class="chip">Portable</span><span class="chip">Heavy industry</span><span class="chip">Field service</span></div>
     <span class="btn red go soon" style="padding:13px 22px">Visit UROmac →</span></div>
+  </div>
+   </div>
   </div>
  </div>`,
 
