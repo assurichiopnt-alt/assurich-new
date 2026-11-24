@@ -11,14 +11,15 @@
 ## โครงสร้างหน้า
 - ส่วนบนสุด: การ์ด 3D หมุน 6 ใบ (About · Robot A1 · ERW · On-Site · Valves · Robocare)
   - สีประจำหมวด, แสงเรือง, ประกายไฟ, เงาสะท้อน, การ์ดเอียงตามเมาส์, หมุนเองทุก 5 วินาที, แถบตัววิ่ง
-- แถบลอยด้านขวา: Customer Support (TH +66 2 029 9378 · SG +65 6459 1069 · WhatsApp +65 9818 3419 · sales@assurich.com)
+- ปุ่มลอยด้านซ้าย: WhatsApp +65 9818 3419
+- แถบลอยด้านขวา: Customer Support (TH +66 2 029 9378 · SG +65 6459 1069 · sales@assurich.com)
 - คลิกการ์ดแล้วแสดงรายละเอียดด้านล่าง
   1. About: ซ้ายข้อมูลบริษัท ขวารูป
   2. Robot A1: รูปใหญ่ + รายละเอียด + 2 กล่อง (Cobot 5 แบรนด์ / Lifting 4 แบรนด์)
   3. ERW: รูป + รายชื่อ 5 แบรนด์
   4. On-Site: รูป + รายละเอียด + 2 กล่อง (Insitools / UROmac)
-  5. Valves: หน้าร้านค้า
-  6. Robocare: Coming soon
+  5. Valves: โปสเตอร์วาล์วอุตสาหกรรม + ปุ่มติดต่อสั่งซื้อ
+  6. Robocare: Healthcare robotics poster
 
 ## จุดแก้ไขใน index.html
 | ต้องการแก้ | ค้นหาคำนี้ในไฟล์ |

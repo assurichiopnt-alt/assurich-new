@@ -33,8 +33,9 @@ h1,h2,h3,.disp{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;letter-spac
 .brand{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-weight:900;font-size:clamp(22px,2.4vw,30px);letter-spacing:.12em}
 .brand span{color:var(--red)}
 .brand.logo-top{display:block;line-height:0;text-shadow:none!important;position:relative;z-index:3}
-.brand.logo-top img{display:block;height:clamp(112px,16.5vh,190px);width:auto;filter:drop-shadow(0 8px 22px rgba(0,0,0,.6)) drop-shadow(0 0 34px rgba(232,181,62,.32));transition:transform .4s cubic-bezier(.2,.8,.2,1),filter .4s}
-.brand.logo-top:hover img{transform:translateY(-2px) scale(1.03);filter:drop-shadow(0 6px 18px rgba(0,0,0,.55)) drop-shadow(0 0 30px rgba(232,181,62,.45))}
+.brand.logo-top img{display:block;width:min(78vw,480px);height:auto;filter:drop-shadow(0 6px 16px rgba(0,0,0,.4)) drop-shadow(0 0 8px rgba(0,184,255,.18));animation:logoSparkle 4.8s ease-in-out infinite;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.brand.logo-top:hover img{transform:translateY(-2px) scale(1.02)}
+@keyframes logoSparkle{0%,60%,100%{filter:drop-shadow(0 6px 16px rgba(0,0,0,.4)) drop-shadow(0 0 8px rgba(0,184,255,.18))}63%{filter:drop-shadow(0 8px 22px rgba(0,0,0,.34)) drop-shadow(0 0 28px rgba(0,194,255,.72)) drop-shadow(0 0 44px rgba(255,255,255,.36))}66%{filter:drop-shadow(0 6px 16px rgba(0,0,0,.4)) drop-shadow(0 0 8px rgba(0,184,255,.18))}69%{filter:drop-shadow(0 8px 22px rgba(0,0,0,.34)) drop-shadow(0 0 24px rgba(0,194,255,.64)) drop-shadow(0 0 38px rgba(255,255,255,.3))}72%{filter:drop-shadow(0 6px 16px rgba(0,0,0,.4)) drop-shadow(0 0 8px rgba(0,184,255,.18))}}
 .hero .status{margin-top:10px}
 .hero .brand.logo-top~.stage{margin-top:clamp(14px,2.6vh,34px);height:clamp(380px,52vh,560px)}
 .hero .brand.logo-top~.stage .slide{width:clamp(220px,min(21vw,30vh),330px)}
@@ -108,6 +109,18 @@ h1,h2,h3,.disp{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;letter-spac
   display:flex;flex-direction:column;align-items:center;gap:16px;box-shadow:-6px 0 24px rgba(0,0,0,.35)}
 .support-tab .ic{width:28px;height:28px;border-radius:50%;background:var(--red);display:grid;place-items:center}
 .support-tab .vt{writing-mode:vertical-rl;transform:rotate(180deg);font-size:12.5px;font-weight:700;letter-spacing:.04em}
+.whatsapp-tab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:60;width:54px;padding:15px 0 16px;
+  display:flex;flex-direction:column;align-items:center;gap:11px;border:1px solid rgba(37,211,102,.24);border-left:0;
+  border-radius:0 16px 16px 0;background:linear-gradient(180deg,rgba(13,44,40,.97),rgba(8,22,39,.97));color:#fff;
+  box-shadow:0 12px 30px rgba(0,0,0,.38),inset -1px 0 rgba(255,255,255,.08);
+  transition:transform .2s,box-shadow .2s,border-color .2s}
+.whatsapp-tab:hover,.whatsapp-tab:focus-visible{transform:translate(4px,-50%);border-color:rgba(37,211,102,.55);
+  box-shadow:0 14px 34px rgba(0,0,0,.46),0 0 18px rgba(37,211,102,.12)}
+.whatsapp-tab:active{transform:translate(2px,-50%) scale(.98)}
+.whatsapp-tab:focus-visible{outline:2px solid #fff;outline-offset:4px}
+.whatsapp-tab .ic{width:34px;height:34px;border-radius:50%;background:linear-gradient(145deg,#27dc79,#119755);display:grid;place-items:center;
+  box-shadow:0 0 0 4px rgba(37,211,102,.1),inset 0 0 0 1px rgba(255,255,255,.2)}
+.whatsapp-tab .wa-label{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.1em}
 .support-panel{position:fixed;right:66px;top:50%;transform:translate(20px,-50%);opacity:0;pointer-events:none;z-index:61;width:310px;
   background:#0b1630;border:1px solid var(--line);border-radius:18px;padding:22px;transition:.3s;box-shadow:0 30px 60px rgba(0,0,0,.6)}
 .support-panel.open{opacity:1;pointer-events:auto;transform:translate(0,-50%)}
@@ -222,6 +235,11 @@ footer{display:none}
 .feature{background:var(--bg2);border:1px solid var(--line);border-radius:30px;padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
 .feature .media{position:relative;aspect-ratio:1/.93;border-radius:22px;overflow:hidden}
 .feature .media svg{width:100%;height:100%;display:block}
+.feature.valves-feature{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,70px)}
+.feature.valves-feature .media.valve-poster{aspect-ratio:auto;overflow:visible;display:flex;align-items:center;justify-content:center;background:transparent}
+.feature.valves-feature .valve-poster img{width:auto;height:auto;max-width:min(100%,420px);max-height:min(72vh,720px);object-fit:contain;
+  border-radius:20px;box-shadow:0 36px 80px -30px rgba(0,0,0,.9),0 0 60px -30px rgba(47,155,255,.7)}
+@media (max-width:900px){.feature.valves-feature{grid-template-columns:minmax(0,1fr);padding:20px 16px;gap:24px}.feature.valves-feature .valve-poster img{max-width:100%;max-height:min(68vh,720px)}}
 .feature h2{font-weight:800;font-size:clamp(40px,4.8vw,64px);line-height:.98;margin:18px 0 20px}
 .feature h2 em{font-style:normal;color:#7f8cab}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:6px 0 28px;max-width:520px}
@@ -231,6 +249,10 @@ footer{display:none}
 
 .soon-card{border:1px dashed #24365c;border-radius:30px;padding:80px 30px;text-align:center}
 .soon-card h2{font-size:clamp(38px,5vw,60px);font-weight:800;margin:14px 0}
+.care-poster{display:flex;justify-content:center;padding:12px}
+.care-poster img{display:block;width:auto;height:auto;max-width:min(100%,512px);max-height:calc(100vh - 120px);object-fit:contain;
+  border-radius:20px;box-shadow:0 36px 80px -30px rgba(0,0,0,.9),0 0 60px -30px rgba(47,155,255,.7)}
+@media (max-width:900px){.care-poster{padding:8px}.care-poster img{max-width:100%;max-height:none}}
 
 footer{border-top:1px solid var(--line);margin-top:60px;padding:40px 28px;color:var(--dim);font-size:13px}
 footer .in{max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
@@ -273,7 +295,7 @@ body.intro-done .hero .ctrl{animation:hin .9s cubic-bezier(.2,.8,.2,1) .8s both}
 body.intro-done .hero .hint{animation:hin .9s cubic-bezier(.2,.8,.2,1) .7s both}
 @keyframes hin{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes hstage{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){#intro{display:none}}
+@media (prefers-reduced-motion:reduce){#intro{display:none}.brand.logo-top img{animation:none}}
 /* ===== ฉากท้องฟ้ากลางคืนแบบคลิปเปิด ===== */
 .hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background-image:
@@ -297,6 +319,8 @@ body.intro-done .hero .hint{animation:hin .9s cubic-bezier(.2,.8,.2,1) .7s both}
 /* การ์ดที่เป็นโปสเตอร์ (มีตัวหนังสือในรูปอยู่แล้ว): ซ่อนชื่อ/คำบรรยาย/เงามืด ไม่ให้ทับกัน */
 .slide.poster .art img{object-position:50% 12%}
 .slide.poster .art::after{background:linear-gradient(180deg,transparent 78%,rgba(0,0,0,.55) 100%)}
+.slide.care-slide .art::after{background:none}
+.slide.care-slide .cta{display:none}
 .slide.poster .ttl,.slide.poster .sub,.slide.poster .num{display:none}
 /* หน้า About: แสดงโปสเตอร์เต็มใบ ไม่ครอป */
 .feature .media.poster{aspect-ratio:auto;overflow:visible;display:flex;justify-content:center;align-items:center}
@@ -412,11 +436,18 @@ body.of-open .detail,body.of-open .detail *{animation-play-state:paused!importan
   .feature.about .media.poster img{width:100%;max-width:100%;max-height:none}
   .status{flex-wrap:wrap;justify-content:center;text-align:center;padding:0 16px;font-size:13px;row-gap:2px}
   /* Customer Support: เปลี่ยนเป็นปุ่มกลมมุมขวาล่าง ไม่บังเนื้อหา */
-  .support-tab{top:auto;bottom:16px;right:14px;transform:none;width:52px;height:52px;padding:0;border-radius:50%;display:grid;place-items:center;
+  .support-tab{top:auto;bottom:76px;right:14px;transform:none;width:52px;height:52px;padding:0;border-radius:50%;display:grid;place-items:center;
     box-shadow:0 10px 30px -6px rgba(0,0,0,.7),0 0 0 3px rgba(227,20,31,.25)}
   .support-tab .vt{display:none}
   .support-tab .ic{width:36px;height:36px}
-  .support-panel{top:auto;bottom:80px;right:14px;transform:translateY(16px)}
+  .whatsapp-tab{top:auto;bottom:76px;left:14px;transform:none;width:auto;height:48px;padding:5px 15px 5px 7px;
+    flex-direction:row;gap:9px;border:1px solid rgba(255,255,255,.2);border-radius:999px;
+    background:linear-gradient(135deg,#16b978,#08734f);box-shadow:0 10px 26px rgba(0,0,0,.38),0 0 0 3px rgba(37,211,102,.1)}
+  .whatsapp-tab:hover,.whatsapp-tab:focus-visible{transform:translateY(-2px)}
+  .whatsapp-tab:active{transform:translateY(-1px) scale(.98)}
+  .whatsapp-tab .ic{width:36px;height:36px}
+  .whatsapp-tab .wa-label{writing-mode:horizontal-tb;transform:none;font-size:13px;letter-spacing:.01em}
+  .support-panel{top:auto;bottom:140px;right:14px;transform:translateY(16px)}
   .support-panel.open{transform:none}
   .of-box{max-height:calc(100vh - 24px);border-radius:20px}
   .offices{padding:12px}
@@ -424,6 +455,8 @@ body.of-open .detail,body.of-open .detail *{animation-play-state:paused!importan
 /* แถบปุ่ม Back: มีพื้นหลังไล่สี ไม่ให้ตัวหนังสือที่เลื่อนผ่านมาทับ */
 .back{width:100%;justify-content:center;background:linear-gradient(180deg,#030a1f 0%,#030a1f 62%,rgba(3,10,31,0) 100%);padding-bottom:16px;margin-bottom:-10px}
 @media (max-width:900px){.wm{display:none}.detail-in{padding-bottom:90px}}
+body.viewing .whatsapp-tab,body.of-open .whatsapp-tab{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(calc(-50% + 8px))}
+@media (max-width:900px){body.viewing .support-tab,body.of-open .support-tab,body.viewing .support-panel,body.of-open .support-panel{opacity:0;visibility:hidden;pointer-events:none}}
 </style>
 </head>
 <body>
@@ -481,7 +514,7 @@ body.of-open .detail,body.of-open .detail *{animation-play-state:paused!importan
   <div class="rays"></div>
   <div class="glow"></div>
   <div class="bigword" id="bigword">About</div>
-  <a class="brand logo-top" href="#top" aria-label="ASSURICH"><img src="images/assurich-logo.png" alt="ASSURICH" width="340" height="280" decoding="async"></a>
+  <a class="brand logo-top" href="#top" aria-label="ASSURICH"><img src="images/assurich-logo.png" alt="ASSURICH Industries Pte Ltd" decoding="async"></a>
   <div class="status"><i class="dot"></i><b>Now serving ASEAN</b> · 43+ years of industrial solutions</div>
 
   <div class="stage" id="stage"><div class="track" id="track"></div></div>
@@ -515,6 +548,10 @@ body.of-open .detail,body.of-open .detail *{animation-play-state:paused!importan
   <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1v-6h3zM3 19a2 2 0 002 2h1v-6H3z"/></svg></span>
   <span class="vt">Customer Support</span>
 </button>
+<a class="whatsapp-tab" href="https://wa.me/6598183419" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.5a8.4 8.4 0 01-12.4 7.4L3 20l1.2-4.8A8.4 8.4 0 1120.5 11.5z"/><path d="M9 8.5c.3-.6.6-.6.9-.6h.4c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4-.1.6l-.5.6c-.2.2-.2.4-.1.6.4.7 1 1.3 1.7 1.7.2.1.4.1.6-.1l.6-.5c.2-.2.4-.2.6-.1l1.7.7c.3.1.4.3.4.5v.4c0 .3 0 .6-.6.9-.5.3-1.6.5-3.1-.1-1.6-.7-2.9-2-3.6-3.6-.6-1.5-.4-2.6-.1-3.1z"/></svg></span>
+  <span class="wa-label">WhatsApp</span>
+</a>
 <div class="support-panel" id="supPanel">
   <button class="sp-close" id="supClose">×</button>
   <h4>Customer Support</h4>
@@ -553,6 +590,8 @@ onsiteCard:`<img src="images/insitools-card.jpg" alt="INSITOOLS — portable mac
 robotCard:`<img src="images/robot-a1-card.jpg" alt="ROBOT A1 — European industrial automation by Assurich Group" decoding="async">`,
 robotFlow:`<img src="images/robot-a1-flow.jpg" alt="ROBOT A1 — One smart factory, one seamless flow: welding, cobot picking, AGV transport, automated storage" decoding="async">`,
 aboutMap:`<img src="images/about-offices.jpg" alt="ASSURICH Industries Pte Ltd — offices across ASEAN since 1983" decoding="async">`,
+valvesCard:`<img src="images/valves-card.png" alt="ASSURICH Industrial Valve and Flow Control Solutions" decoding="async">`,
+robocareCard:`<img src="images/robocare-card.png" alt="ASSURICH Robocare — smarter care and healthcare robotics" decoding="async">`,
 robot:`<svg viewBox="0 0 300 470" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1d2a33"/><stop offset="1" stop-color="#0c1014"/></linearGradient><linearGradient id="gm" x1="0" x2="1"><stop offset="0" stop-color="#f3f4f6"/><stop offset="1" stop-color="#9aa3ad"/></linearGradient></defs><rect width="300" height="470" fill="url(#gr)"/><g stroke="#2d3d48" stroke-width="1">${Array.from({length:12},(_,i)=>`<line x1="0" y1="${360+i*10}" x2="300" y2="${330+i*14}"/>`).join('')}</g><circle cx="230" cy="90" r="80" fill="#3fa9ff" opacity=".12"/><rect x="95" y="355" width="90" height="26" rx="6" fill="#2a3640"/><rect x="112" y="320" width="56" height="40" rx="10" fill="url(#gm)"/><g stroke-linecap="round"><line x1="140" y1="325" x2="105" y2="210" stroke="url(#gm)" stroke-width="30"/><line x1="105" y1="210" x2="200" y2="150" stroke="url(#gm)" stroke-width="24"/><line x1="200" y1="150" x2="215" y2="205" stroke="url(#gm)" stroke-width="16"/></g><circle cx="140" cy="325" r="20" fill="#e3141f"/><circle cx="105" cy="210" r="18" fill="#e3141f"/><circle cx="200" cy="150" r="14" fill="#e3141f"/><rect x="204" y="205" width="22" height="16" rx="3" fill="#cfd5db"/><path d="M206 221v14M224 221v14" stroke="#cfd5db" stroke-width="4"/><rect x="180" y="248" width="70" height="44" rx="4" fill="#ffb648" opacity=".9"/><rect x="180" y="248" width="70" height="10" fill="#d48a20" opacity=".9"/></svg>`,
 erw:`<svg viewBox="0 0 300 470" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="ge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b1a12"/><stop offset="1" stop-color="#0e0907"/></linearGradient><linearGradient id="gc" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#e9e2d6"/><stop offset=".5" stop-color="#8b8279"/><stop offset="1" stop-color="#d9d1c4"/></linearGradient></defs><rect width="300" height="470" fill="url(#ge)"/><circle cx="150" cy="235" r="150" fill="#ff7a2a" opacity=".1"/><rect x="10" y="226" width="280" height="18" rx="9" fill="url(#gc)"/>${[40,95,150,205,260].map((x,i)=>`<rect x="${x-14}" y="${i%2?186:214}" width="28" height="60" rx="7" fill="url(#gc)" opacity=".95"/><circle cx="${x}" cy="${i%2?196:274}" r="16" fill="url(#gc)"/>`).join('')}<g fill="#ff8a3a" opacity=".85">${Array.from({length:26},(_,i)=>`<circle cx="${150+Math.cos(i)*((i*9)%90+20)}" cy="${300+Math.sin(i*1.7)*30+i*2}" r="${1+(i%3)}"/>`).join('')}</g></svg>`,
 onsite:`<svg viewBox="0 0 300 470" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="go" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a5560"/><stop offset=".6" stop-color="#1f262d"/><stop offset="1" stop-color="#0d1013"/></linearGradient></defs><rect width="300" height="470" fill="url(#go)"/><g stroke="#ffcf3f" stroke-width="10" opacity=".85"><line x1="0" y1="440" x2="60" y2="380"/><line x1="40" y1="470" x2="120" y2="390"/></g><circle cx="150" cy="235" r="110" fill="#2b3338" stroke="#6c777f" stroke-width="10"/>${Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;return `<circle cx="${150+Math.cos(a)*92}" cy="${235+Math.sin(a)*92}" r="7" fill="#8a949b"/>`}).join('')}<circle cx="150" cy="235" r="62" fill="#111" stroke="#bfc6cc" stroke-width="3"/><rect x="142" y="60" width="16" height="190" fill="#d9dee2"/><rect x="118" y="40" width="64" height="38" rx="6" fill="#e3141f"/><rect x="132" y="228" width="36" height="12" rx="3" fill="#ffcf3f"/></svg>`,
@@ -566,8 +605,8 @@ const SLIDES = [
  {key:'robot', art:'robotCard', poster:true, title:'Robot A1', word:'Robot A1', acc:'#2f9bff', sub:'Cobots & material handling', tag:'PILLAR 1'},
  {key:'erw', title:'ERW', word:'ERW', acc:'#ff5a1f', sub:'Engine rebuilding equipment', tag:'PILLAR 2'},
  {key:'onsite', art:'onsiteCard', poster:true, title:'On-Site', word:'On-Site', acc:'#ffc928', sub:'On-site machining tools', tag:'PILLAR 3'},
- {key:'valves', title:'Valves', word:'Valves', acc:'#e3141f', sub:'Industrial valve shop', tag:'PILLAR 4 · SHOP'},
- {key:'care', title:'Robocare', word:'Robocare', acc:'#2fd6c4', sub:'Center care · coming soon', tag:'PILLAR 5'}
+ {key:'valves', art:'valvesCard', poster:true, title:'Valves', word:'Valves', acc:'#e3141f', sub:'Industrial valve shop', tag:'PILLAR 4 · SHOP'},
+ {key:'care', art:'robocareCard', poster:true, title:'Robocare', word:'Robocare', acc:'#2fd6c4', sub:'Healthcare robotics', tag:'PILLAR 5'}
 ];
 
 const L = (name, desc, url, logo) => ({name, desc, url, logo});
@@ -717,8 +756,8 @@ onsite:()=>`
  </div>`,
 
 valves:()=>`
- <div class="feature pane">
-  <div class="media">${ART.valves}</div>
+ <div class="feature pane valves-feature">
+  <div class="media valve-poster">${ART.valvesCard}</div>
   <div>
    <span class="badge">Shop</span>
    <h2>Industrial Valves <em>in stock.</em></h2>
@@ -728,10 +767,8 @@ valves:()=>`
  </div>`,
 
 care:()=>`
- <div class="soon-card pane">
-  <span class="badge">06 · Coming soon</span>
-  <h2>Robocare Center</h2>
-  <p class="lead" style="margin:0 auto">Service, maintenance and spare parts for every robot we install.</p>
+ <div class="care-poster pane">
+  ${ART.robocareCard}
  </div>`
 };
 
@@ -744,6 +781,7 @@ let cur = 0;
 SLIDES.forEach((s,i)=>{
   const el = document.createElement('div');
   el.className='slide'+(s.poster?' poster':'');
+  if(s.key==='care') el.classList.add('care-slide');
   el.classList.add('enter');
   el.innerHTML = `<div class="inner"><div class="shine"></div><div class="art">${ART[s.art||s.key]}</div><div class="num">${s.tag}</div><div class="ttl">${s.title}</div><div class="sub">${s.sub}</div><div class="cta">▶ Explore</div></div>`;
   el.addEventListener('click',()=>{ if(dragMoved) return; if(i===cur) openPane(i,true); else go(i); });
