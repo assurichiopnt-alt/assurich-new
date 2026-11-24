@@ -30,6 +30,10 @@ h1,h2,h3,.disp{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;letter-spac
     radial-gradient(800px 220px at 50% 100%,rgba(40,105,200,.35),transparent 70%),
     radial-gradient(1200px 700px at 50% 38%,#0c2048 0%,#061334 45%,transparent 80%),
     linear-gradient(180deg,#01030c 0%,#030a1f 50%,#06112c 82%,var(--bg) 100%)}
+.city-backdrop{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.36;
+  background-image:linear-gradient(180deg,rgba(3,7,20,.28),rgba(3,7,20,.58)),url("images/singapore-background.jpg");
+  background-position:center,center 45%;background-size:cover;background-repeat:no-repeat}
+@media (max-width:600px){.city-backdrop{background-position:center,90% center}}
 .brand{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-weight:900;font-size:clamp(22px,2.4vw,30px);letter-spacing:.12em}
 .brand span{color:var(--red)}
 .brand.logo-top{display:block;line-height:0;text-shadow:none!important;position:relative;z-index:3}
@@ -185,6 +189,8 @@ footer{display:none}
 .cover.flow{aspect-ratio:2/3;justify-self:center;width:min(100%,calc(min(82vh,860px)*2/3))}
 .cover.flow::after{display:none}
 .cover.flow img{object-fit:cover;object-position:50% 0}
+.cover.flow.erw-poster{box-shadow:0 36px 80px -30px rgba(0,0,0,.9),0 0 60px -30px rgba(47,155,255,.7)}
+.cover.flow.erw-poster img{border-radius:var(--r)}
 @media (max-width:560px){.row .logo{width:72px;height:30px}.row .who{gap:10px}}
 
 /* boxes (embed-like) */
@@ -510,6 +516,7 @@ body.viewing .whatsapp-tab,body.of-open .whatsapp-tab{opacity:0;visibility:hidde
 
 <!-- ================= HERO ================= -->
 <section class="hero" id="top">
+  <div class="city-backdrop" aria-hidden="true"></div>
   <canvas id="fx"></canvas>
   <div class="rays"></div>
   <div class="glow"></div>
@@ -590,6 +597,7 @@ onsiteCard:`<img src="images/insitools-card.jpg" alt="INSITOOLS — portable mac
 robotCard:`<img src="images/robot-a1-card.jpg" alt="ROBOT A1 — European industrial automation by Assurich Group" decoding="async">`,
 robotFlow:`<img src="images/robot-a1-flow.jpg" alt="ROBOT A1 — One smart factory, one seamless flow: welding, cobot picking, AGV transport, automated storage" decoding="async">`,
 aboutMap:`<img src="images/about-offices.jpg" alt="ASSURICH Industries Pte Ltd — offices across ASEAN since 1983" decoding="async">`,
+erwPoster:`<img src="images/engine-rebuilding-center.png" alt="ASSURICH Engine Rebuilding Center — restore performance, extend lifespan, reduce cost" decoding="async">`,
 valvesCard:`<img src="images/valves-card.png" alt="ASSURICH Industrial Valve and Flow Control Solutions" decoding="async">`,
 robocareCard:`<img src="images/robocare-card.png" alt="ASSURICH Robocare — smarter care and healthcare robotics" decoding="async">`,
 robot:`<svg viewBox="0 0 300 470" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1d2a33"/><stop offset="1" stop-color="#0c1014"/></linearGradient><linearGradient id="gm" x1="0" x2="1"><stop offset="0" stop-color="#f3f4f6"/><stop offset="1" stop-color="#9aa3ad"/></linearGradient></defs><rect width="300" height="470" fill="url(#gr)"/><g stroke="#2d3d48" stroke-width="1">${Array.from({length:12},(_,i)=>`<line x1="0" y1="${360+i*10}" x2="300" y2="${330+i*14}"/>`).join('')}</g><circle cx="230" cy="90" r="80" fill="#3fa9ff" opacity=".12"/><rect x="95" y="355" width="90" height="26" rx="6" fill="#2a3640"/><rect x="112" y="320" width="56" height="40" rx="10" fill="url(#gm)"/><g stroke-linecap="round"><line x1="140" y1="325" x2="105" y2="210" stroke="url(#gm)" stroke-width="30"/><line x1="105" y1="210" x2="200" y2="150" stroke="url(#gm)" stroke-width="24"/><line x1="200" y1="150" x2="215" y2="205" stroke="url(#gm)" stroke-width="16"/></g><circle cx="140" cy="325" r="20" fill="#e3141f"/><circle cx="105" cy="210" r="18" fill="#e3141f"/><circle cx="200" cy="150" r="14" fill="#e3141f"/><rect x="204" y="205" width="22" height="16" rx="3" fill="#cfd5db"/><path d="M206 221v14M224 221v14" stroke="#cfd5db" stroke-width="4"/><rect x="180" y="248" width="70" height="44" rx="4" fill="#ffb648" opacity=".9"/><rect x="180" y="248" width="70" height="10" fill="#d48a20" opacity=".9"/></svg>`,
@@ -602,11 +610,11 @@ care:`<svg viewBox="0 0 300 470" preserveAspectRatio="xMidYMid slice"><defs><lin
 /* ---------- DATA ---------- */
 const SLIDES = [
  {key:'about', poster:true, title:'About Assurich', word:'Assurich', acc:'#e8b53e', sub:'43+ years · 6 countries', tag:'01'},
- {key:'robot', art:'robotCard', poster:true, title:'Robot A1', word:'Robot A1', acc:'#2f9bff', sub:'Cobots & material handling', tag:'PILLAR 1'},
- {key:'erw', title:'ERW', word:'ERW', acc:'#ff5a1f', sub:'Engine rebuilding equipment', tag:'PILLAR 2'},
- {key:'onsite', art:'onsiteCard', poster:true, title:'On-Site', word:'On-Site', acc:'#ffc928', sub:'On-site machining tools', tag:'PILLAR 3'},
- {key:'valves', art:'valvesCard', poster:true, title:'Valves', word:'Valves', acc:'#e3141f', sub:'Industrial valve shop', tag:'PILLAR 4 · SHOP'},
- {key:'care', art:'robocareCard', poster:true, title:'Robocare', word:'Robocare', acc:'#2fd6c4', sub:'Healthcare robotics', tag:'PILLAR 5'}
+ {key:'robot', art:'robotCard', poster:true, title:'Robot A1', word:'Robot A1', acc:'#f5a623', sub:'Cobots & material handling', tag:'PILLAR 1'},
+ {key:'erw', art:'erwPoster', poster:true, title:'ERW', word:'ERW', acc:'#24466b', sub:'Engine rebuilding equipment', tag:'PILLAR 2'},
+ {key:'onsite', art:'onsiteCard', poster:true, title:'On-Site', word:'On-Site', acc:'#e3141f', sub:'On-site machining tools', tag:'PILLAR 3'},
+ {key:'valves', art:'valvesCard', poster:true, title:'Valves', word:'Valves', acc:'#168dff', sub:'Industrial valve shop', tag:'PILLAR 4 · SHOP'},
+ {key:'care', art:'robocareCard', poster:true, title:'Robocare', word:'Robocare', acc:'#2fa86c', sub:'Healthcare robotics', tag:'PILLAR 5'}
 ];
 
 const L = (name, desc, url, logo) => ({name, desc, url, logo});
@@ -721,7 +729,7 @@ robot:()=>`
 
 erw:()=>`
  <div class="split pane">
-  ${cover('erw','ERW','Engine Rebuilding')}
+  <div class="cover flow erw-poster">${ART.erwPoster}</div>
   <div>
    <div class="eyebrow">Pillar 2</div>
    <h1 class="big">ERW</h1>
