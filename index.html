@@ -34,6 +34,7 @@ h1,h2,h3,.disp{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;letter-spac
   background-image:linear-gradient(180deg,rgba(3,7,20,.28),rgba(3,7,20,.58)),url("images/singapore-background.jpg");
   background-position:center,center 45%;background-size:cover;background-repeat:no-repeat}
 @media (max-width:600px){.city-backdrop{background-position:center,90% center}}
+@media (max-width:900px){.hero-certifications{left:14px;bottom:58px}.hero-certifications .iso-logo{width:58px}.hero-certifications .bizsafe-logo{width:92px}}
 .brand{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-weight:900;font-size:clamp(22px,2.4vw,30px);letter-spacing:.12em}
 .brand span{color:var(--red)}
 .brand.logo-top{display:block;line-height:0;text-shadow:none!important;position:relative;z-index:3}
@@ -49,9 +50,10 @@ h1,h2,h3,.disp{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;letter-spac
 .ars-badge{display:flex;align-items:center;gap:9px;margin-top:5px;padding:5px 10px;border:1px solid rgba(232,181,62,.38);border-radius:999px;background:rgba(8,17,39,.72);font-size:11px;font-weight:700;letter-spacing:.04em;color:#f1dca0}
 .ars-badge svg{width:18px;height:18px;flex:none}
 .ars-badge span{color:#fff}.ars-badge em{font-style:normal;color:#e8b53e}
-.certification-strip{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:4px}
-.cert-badge{height:28px;display:flex;align-items:center;justify-content:center;padding:2px 5px;border:1px solid rgba(232,181,62,.28);border-radius:6px;background:rgba(8,17,39,.72);box-shadow:0 8px 22px -16px rgba(232,181,62,.7)}
-.cert-badge svg{height:22px;width:auto;display:block}
+.hero-certifications{position:absolute;left:28px;bottom:66px;z-index:3;display:flex;align-items:flex-end;gap:10px;pointer-events:none}
+.hero-certifications img{display:block;height:auto;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(0,0,0,.48));opacity:.94}
+.hero-certifications .iso-logo{width:74px}
+.hero-certifications .bizsafe-logo{width:118px}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(227,20,31,.6);animation:pulse 1.8s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(227,20,31,0)}100%{box-shadow:0 0 0 0 rgba(227,20,31,0)}}
 
@@ -655,26 +657,9 @@ body.of-open .whatsapp-tab{opacity:0;visibility:hidden;pointer-events:none}
     <svg viewBox="0 0 24 24" fill="none" stroke="#e8b53e" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M8 10l4-3 4 3M8.5 14.5h7"/></svg>
     <span>ASSURICH Referrer Scheme</span><em>(ARS)</em>
   </div>
-  <div class="certification-strip" aria-label="ASSURICH certifications">
-    <span class="cert-badge" title="ISO 9001">
-      <svg viewBox="0 0 118 42" role="img" aria-label="ISO 9001">
-        <rect width="118" height="42" rx="8" fill="#f7f8fa"/>
-        <circle cx="21" cy="21" r="15" fill="none" stroke="#183153" stroke-width="2"/>
-        <path d="M21 10v22M14 14l7 7 7-7M14 28l7-7 7 7" fill="none" stroke="#183153" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <text x="41" y="20" fill="#183153" font-family="Arial,sans-serif" font-size="13" font-weight="800">ISO</text>
-        <text x="41" y="34" fill="#183153" font-family="Arial,sans-serif" font-size="13" font-weight="800">9001</text>
-        <text x="89" y="34" fill="#b58a20" font-family="Arial,sans-serif" font-size="8" font-weight="700">CERT.</text>
-      </svg>
-    </span>
-    <span class="cert-badge" title="BizSAFE">
-      <svg viewBox="0 0 112 42" role="img" aria-label="BizSAFE">
-        <rect width="112" height="42" rx="8" fill="#eef4ff"/>
-        <path d="M18 8l13 4v8c0 8-5 12-13 15-8-3-13-7-13-15v-8z" fill="#2765b7"/>
-        <path d="M11 21l5 5 9-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <text x="38" y="20" fill="#2765b7" font-family="Arial,sans-serif" font-size="16" font-weight="900">BizSAFE</text>
-        <text x="38" y="34" fill="#d02b35" font-family="Arial,sans-serif" font-size="8" font-weight="700">WORKPLACE SAFETY</text>
-      </svg>
-    </span>
+  <div class="hero-certifications" aria-label="ISO 9001 and BizSAFE certifications">
+    <img class="iso-logo" src="images/iso-9001.png" alt="ISO 9001:2015" decoding="async">
+    <img class="bizsafe-logo" src="images/bizsafe-level-4.png" alt="BizSAFE Enterprise Level 4" decoding="async">
   </div>
 
   <div class="stage" id="stage"><div class="track" id="track"></div></div>
