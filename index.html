@@ -1135,8 +1135,8 @@ function spawn(){const w=cv.width,h=cv.height;return{x:w/2+(Math.random()-.5)*w*
 function spawnWater(){
   const mobile=window.innerWidth<=600;
   const tablet=window.innerWidth<=900;
-  const originX=mobile?cv.width*.72:tablet?cv.width*.78:cv.width*.805;
-  const originY=mobile?cv.height*.31:cv.height*.300;
+  const originX=mobile?cv.width*.68:tablet?cv.width*.74:cv.width*.768;
+  const originY=mobile?cv.height*.35:tablet?cv.height*.34:cv.height*.334;
   const progress=Math.random();
   return{
     x:originX+(Math.random()-.5)*8*DPR,
@@ -1167,8 +1167,8 @@ for(let i=0;i<220;i++){const p=spawnWater();p.l=Math.random()*p.m;p.x+=p.vx*p.l;
     if(p.l>p.m)WATER[i]=spawnWater();});
   const mobile=window.innerWidth<=600;
   const tablet=window.innerWidth<=900;
-  const sprayX=mobile?cv.width*.72:tablet?cv.width*.78:cv.width*.805;
-  const sprayY=mobile?cv.height*.31:cv.height*.300;
+  const sprayX=mobile?cv.width*.68:tablet?cv.width*.74:cv.width*.768;
+  const sprayY=mobile?cv.height*.35:tablet?cv.height*.34:cv.height*.334;
   const sprayEndX=mobile?cv.width*.28:tablet?cv.width*.20:cv.width*.28;
   const sprayEndY=cv.height*.70;
   cx.globalAlpha=.46;
