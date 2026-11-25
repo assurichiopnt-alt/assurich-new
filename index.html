@@ -46,6 +46,9 @@ h1,h2,h3,.disp{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;letter-spac
 .hero:has(.logo-top){padding-top:16px}
 .status{margin-top:14px;font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center}
 .status b{color:var(--text);font-weight:600}
+.ars-badge{display:flex;align-items:center;gap:9px;margin-top:10px;padding:7px 12px;border:1px solid rgba(232,181,62,.38);border-radius:999px;background:rgba(8,17,39,.72);font-size:12px;font-weight:700;letter-spacing:.04em;color:#f1dca0}
+.ars-badge svg{width:18px;height:18px;flex:none}
+.ars-badge span{color:#fff}.ars-badge em{font-style:normal;color:#e8b53e}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(227,20,31,.6);animation:pulse 1.8s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(227,20,31,0)}100%{box-shadow:0 0 0 0 rgba(227,20,31,0)}}
 
@@ -121,18 +124,18 @@ h1,h2,h3,.disp{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;letter-spac
 .support-tab .ic{width:34px;height:34px;border-radius:50%;background:linear-gradient(145deg,#ff5964,#c9091d);display:grid;place-items:center;
   box-shadow:0 0 0 4px rgba(227,20,31,.16),inset 0 0 0 1px rgba(255,255,255,.2)}
 .support-tab .vt{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.1em}
-.whatsapp-tab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:60;width:54px;padding:15px 0 16px;
-  display:flex;flex-direction:column;align-items:center;gap:11px;border:1px solid rgba(37,211,102,.24);border-left:0;
-  border-radius:0 16px 16px 0;background:linear-gradient(180deg,rgba(13,44,40,.97),rgba(8,22,39,.97));color:#fff;
-  box-shadow:0 12px 30px rgba(0,0,0,.38),inset -1px 0 rgba(255,255,255,.08);
+.whatsapp-tab{position:fixed;right:18px;bottom:18px;z-index:60;width:auto;height:52px;padding:6px 16px 6px 7px;
+  display:flex;flex-direction:row;align-items:center;gap:9px;border:1px solid rgba(37,211,102,.55);
+  border-radius:999px;background:linear-gradient(135deg,#16b978,#08734f);color:#fff;
+  box-shadow:0 12px 30px rgba(0,0,0,.42),0 0 0 4px rgba(37,211,102,.1);
   transition:transform .2s,box-shadow .2s,border-color .2s}
-.whatsapp-tab:hover,.whatsapp-tab:focus-visible{transform:translate(4px,-50%);border-color:rgba(37,211,102,.55);
+.whatsapp-tab:hover,.whatsapp-tab:focus-visible{transform:translateY(-3px);border-color:#52ee91;
   box-shadow:0 14px 34px rgba(0,0,0,.46),0 0 18px rgba(37,211,102,.12)}
-.whatsapp-tab:active{transform:translate(2px,-50%) scale(.98)}
+.whatsapp-tab:active{transform:translateY(-1px) scale(.98)}
 .whatsapp-tab:focus-visible{outline:2px solid #fff;outline-offset:4px}
-.whatsapp-tab .ic{width:34px;height:34px;border-radius:50%;background:linear-gradient(145deg,#27dc79,#119755);display:grid;place-items:center;
+.whatsapp-tab .ic{width:38px;height:38px;border-radius:50%;background:linear-gradient(145deg,#27dc79,#119755);display:grid;place-items:center;
   box-shadow:0 0 0 4px rgba(37,211,102,.1),inset 0 0 0 1px rgba(255,255,255,.2)}
-.whatsapp-tab .wa-label{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.1em}
+.whatsapp-tab .wa-label{writing-mode:horizontal-tb;transform:none;font-size:13px;font-weight:700;letter-spacing:.01em}
 .support-panel{position:fixed;right:66px;top:50%;transform:translate(20px,-50%);opacity:0;pointer-events:none;z-index:61;width:310px;
   background:#0b1630;border:1px solid var(--line);border-radius:18px;padding:22px;transition:.3s;box-shadow:0 30px 60px rgba(0,0,0,.6)}
 .support-panel.open{opacity:1;pointer-events:auto;transform:translate(0,-50%)}
@@ -150,7 +153,11 @@ h1,h2,h3,.disp{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;letter-spac
   transition:transform .75s cubic-bezier(.77,0,.18,1),visibility 0s linear .75s}
 body.viewing{overflow:hidden}
 body.viewing .detail{transform:none;visibility:visible;transition:transform .75s cubic-bezier(.77,0,.18,1),visibility 0s}
-.detail-in{margin:auto 0;width:100%;max-width:1240px;padding:12px 28px 48px}
+.detail-in{margin:0 auto;width:100%;max-width:1240px;padding:12px 28px 48px}
+.detail-in:has(.feature.about){max-width:none;width:100%;padding:0 28px 28px}
+.detail-in:has(.robot-catalog){position:relative;max-width:none;width:100%;padding:0 28px 28px}
+.detail-in:has(.onsite-catalog){position:relative;max-width:none;width:100%;padding:0 28px 28px}
+.detail-in:has(.robot-catalog)::before{content:"";position:absolute;left:10%;right:10%;top:8%;bottom:8%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,color-mix(in srgb,var(--acc,#f5a623) 12%,transparent),transparent 68%);filter:blur(26px)}
 .back{position:sticky;top:0;z-index:5;flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 20px 8px;
   font-size:11px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase}
 .back i{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:rgba(8,17,39,.92);transition:border-color .2s,box-shadow .2s,transform .2s}
@@ -192,13 +199,24 @@ footer{display:none}
 .go:hover{background:var(--yellow);border-color:var(--yellow);color:#111}
 .go.soon{opacity:.45;pointer-events:none}
 .row .who{display:flex;align-items:center;gap:14px;min-width:0}
-.row .logo{flex:none;width:96px;height:40px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
-.row .logo img{width:100%;height:100%;object-fit:contain;display:block}
+.row .logo{flex:none;width:96px;height:40px;border-radius:0;background:transparent;display:flex;align-items:center;justify-content:center;overflow:visible;box-shadow:none}
+.row .logo img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 3px 8px rgba(0,0,0,.28))}
 .cover.flow{aspect-ratio:2/3;justify-self:center;width:min(100%,calc(min(82vh,860px)*2/3))}
 .cover.flow::after{display:none}
 .cover.flow img{object-fit:cover;object-position:50% 0}
 .cover.flow.erw-poster{box-shadow:0 36px 80px -30px rgba(0,0,0,.9),0 0 60px -30px rgba(47,155,255,.7)}
 .cover.flow.erw-poster img{border-radius:var(--r)}
+.detail-in:has(.split.robot-wide){max-width:none;padding-left:clamp(20px,4vw,64px);padding-right:clamp(20px,4vw,64px)}
+.split.robot-wide{grid-template-columns:minmax(0,1.35fr) minmax(380px,.65fr);gap:clamp(24px,4vw,56px);align-items:center;min-height:calc(100vh - 108px)}
+.split.robot-wide>.cover.flow{width:100%;aspect-ratio:16/9;height:auto;align-self:center;justify-self:stretch}
+.split.robot-wide>.cover.flow img{width:100%;height:100%;object-fit:cover;object-position:center}
+.split.robot-wide>.robot-copy{align-self:center}
+.split.robot-wide .brandwall{margin-top:24px;padding-top:18px}
+.split.robot-wide .lead{max-width:none;font-size:15px;line-height:1.55}
+@media (max-width:900px){
+ .split.robot-wide{grid-template-columns:1fr;min-height:auto;gap:24px}
+ .split.robot-wide>.cover.flow{aspect-ratio:16/10}
+}
 @media (max-width:560px){.row .logo{width:72px;height:30px}.row .who{gap:10px}}
 
 /* boxes (embed-like) */
@@ -231,6 +249,71 @@ footer{display:none}
 .box-head.plain h3{font-size:clamp(22px,2vw,28px);letter-spacing:-.01em;line-height:1.1}
 .box-head.plain p{font-size:13.5px;margin-top:2px}
 .brandwall{margin-top:34px;padding-top:24px;border-top:1px solid rgba(255,255,255,.07)}
+.robot-catalog{position:relative;isolation:isolate;width:min(1180px,calc(100% - 56px));margin:0 auto;display:grid;grid-template-columns:1fr;gap:18px;align-content:center;min-height:calc(100vh - 110px)}
+.robot-catalog::before{content:"";position:absolute;left:-18%;right:-18%;top:-12%;bottom:-12%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--acc,#f5a623) 16%,transparent),transparent 68%);filter:blur(30px)}
+.robot-category{position:relative;isolation:isolate;min-height:0;border:1px solid color-mix(in srgb,var(--acc,#f5a623) 42%,#24365c);border-radius:22px;overflow:hidden;background:linear-gradient(135deg,rgba(18,32,63,.96),rgba(8,17,39,.96));box-shadow:0 22px 54px -28px rgba(0,0,0,.9),0 0 28px -16px var(--acc,#f5a623)}
+.robot-category::before{content:"";position:absolute;inset:-80px -40px;z-index:-1;pointer-events:none;background:radial-gradient(closest-side,color-mix(in srgb,var(--acc,#f5a623) 13%,transparent),transparent 72%);filter:blur(18px);opacity:.9}
+.robot-category-layout{display:grid;grid-template-columns:minmax(220px,.78fr) minmax(420px,1.22fr);min-height:250px}
+.robot-category-head{display:flex;flex-direction:column;justify-content:center;padding:24px 28px;background:radial-gradient(circle at 20% 20%,rgba(245,166,35,.14),transparent 36%),linear-gradient(180deg,#10203e,#09142b)}
+.robot-category-head h2{font-size:clamp(30px,3.2vw,48px);line-height:.92}
+.robot-category-head p{color:#aab5cc;font-size:13.5px;line-height:1.5;margin-top:12px}
+.robot-category-head .tag{align-self:flex-start;margin-bottom:14px;border:1px solid color-mix(in srgb,var(--acc,#f5a623) 38%,#24365c);background:color-mix(in srgb,var(--acc,#f5a623) 10%,#24365c);color:#f7e2b2}
+.robot-category-list{padding:10px 20px;display:flex;flex-direction:column;justify-content:center}
+.robot-category-list .rows{border-top:1px solid rgba(255,255,255,.08)}
+.robot-category-list .row{grid-template-columns:34px 1fr auto;padding:9px 4px}
+.robot-category-list .row .nm{font-size:14.5px}
+.robot-category-list .row .logo{width:96px;height:38px}
+.robot-category-list .row{transition:border-color .25s,box-shadow .25s,background .25s}
+.robot-category-list .row:hover{border-bottom-color:color-mix(in srgb,var(--acc,#f5a623) 55%,transparent);background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--acc,#f5a623) 7%,transparent),transparent);box-shadow:0 8px 18px -18px var(--acc,#f5a623)}
+.onsite-catalog{position:relative;isolation:isolate;width:min(1180px,calc(100% - 56px));margin:0 auto;display:grid;grid-template-columns:1fr;gap:18px;align-content:center;min-height:calc(100vh - 110px)}
+.onsite-catalog::before{content:"";position:absolute;inset:-12% -18%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--acc,#e3141f) 12%,transparent),transparent 68%);filter:blur(30px)}
+.onsite-category{position:relative;isolation:isolate;min-height:250px;border:1px solid color-mix(in srgb,var(--acc,#e3141f) 42%,#24365c);border-radius:22px;overflow:hidden;background:linear-gradient(135deg,rgba(18,32,63,.96),rgba(8,17,39,.96));box-shadow:0 22px 54px -28px rgba(0,0,0,.9),0 0 28px -16px var(--acc,#e3141f)}
+.onsite-category-layout{display:grid;grid-template-columns:minmax(220px,.78fr) minmax(420px,1.22fr);min-height:250px}
+.onsite-category-head{display:flex;flex-direction:column;justify-content:center;padding:24px 28px;background:radial-gradient(circle at 18% 20%,color-mix(in srgb,var(--acc,#e3141f) 18%,transparent),transparent 38%),linear-gradient(180deg,#10203e,#09142b)}
+.onsite-category-head .tag{align-self:flex-start;margin-bottom:14px;border:1px solid color-mix(in srgb,var(--acc,#e3141f) 38%,#24365c);background:color-mix(in srgb,var(--acc,#e3141f) 10%,#24365c);color:#f7d4d6}
+.onsite-category-head h2{font-size:clamp(30px,3.2vw,48px);line-height:.92}
+.onsite-category-head p{color:#aab5cc;font-size:13.5px;line-height:1.5;margin-top:12px}
+.onsite-category-head.insitools-head{padding:0;background:#09142b}
+.onsite-category-head.insitools-head .tag{position:absolute;left:18px;top:18px;z-index:2}
+.onsite-brand-banner{width:100%;height:250px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.onsite-brand-banner img{width:100%;height:100%;object-fit:cover;display:block}
+.onsite-category.insitools-category{min-height:250px;background-image:url("images/insitools-banner-720x250.png");background-size:cover;background-position:center}
+.onsite-category.insitools-category::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 48%,rgba(3,12,29,.28) 100%)}
+.onsite-category.insitools-category .onsite-category-layout{grid-template-columns:1fr;min-height:250px}
+.onsite-category.insitools-category .insitools-head{display:none}
+.onsite-category.insitools-category .onsite-category-content{position:absolute;right:16px;bottom:14px;z-index:2;width:380px;padding:0}
+.onsite-category.insitools-category .onsite-link-grid{gap:8px}
+.onsite-category.insitools-category .onsite-link-card{min-height:82px;padding:12px 14px;border-radius:12px;border-color:rgba(255,255,255,.24);background:rgba(8,23,49,.42);backdrop-filter:blur(9px) saturate(1.15);box-shadow:inset 0 1px rgba(255,255,255,.08),0 12px 28px -18px rgba(0,0,0,.85)}
+.onsite-category.insitools-category .onsite-link-card:hover{border-color:rgba(255,255,255,.62);background:rgba(8,23,49,.52);box-shadow:inset 0 1px rgba(255,255,255,.14),0 16px 32px -18px var(--acc,#e3141f)}
+.onsite-category.insitools-category .onsite-link-card h3{font-size:16px;margin:5px 0 7px}
+.onsite-category.insitools-category .onsite-link-card .n{font-size:9px}
+.onsite-category.insitools-category .onsite-link-card .go{font-size:11.5px;padding:6px 9px;background:rgba(227,20,31,.92);border:0;color:#fff}
+.onsite-category-content{display:flex;flex-direction:column;justify-content:center;padding:14px 22px}
+.onsite-link-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.onsite-link-card{min-height:154px;display:flex;flex-direction:column;justify-content:space-between;padding:18px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(16,32,62,.9),rgba(7,20,43,.9));transition:.25s}
+.onsite-link-card:hover{border-color:var(--acc,#e3141f);transform:translateY(-3px);box-shadow:0 16px 34px -20px var(--acc,#e3141f)}
+.onsite-link-card .n{font-size:10px;letter-spacing:.18em;color:var(--dim);font-weight:700}
+.onsite-link-card h3{font-size:clamp(18px,1.8vw,24px);line-height:1.05;margin:8px 0 14px}
+.onsite-link-card .go{align-self:flex-start}
+.uromac-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.uromac-item{padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:rgba(9,20,43,.72)}
+.uromac-item b{display:block;font-size:15px;margin-bottom:5px}
+.uromac-item span{font-size:12.5px;color:#aab5cc}
+@media (max-width:900px){
+ .onsite-catalog{width:calc(100% - 24px);min-height:auto;padding:12px 0 24px}
+ .onsite-category-layout{grid-template-columns:1fr}
+ .onsite-category-head{min-height:170px}
+ .onsite-link-grid,.uromac-list{grid-template-columns:1fr}
+ .onsite-category.insitools-category{min-height:420px;background-size:cover;background-position:center}
+ .onsite-category.insitools-category .onsite-category-content{left:12px;right:12px;bottom:12px;width:auto}
+ .onsite-category.insitools-category .onsite-link-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:900px){
+ .robot-catalog{width:calc(100% - 24px);grid-template-columns:1fr;min-height:auto;padding:12px 0 24px}
+ .robot-category{min-height:0}
+ .robot-category-layout{grid-template-columns:1fr}
+ .robot-category-head{min-height:170px}
+}
 .bw-label{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin-bottom:18px}
 .bw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px 30px;align-items:center}
 .bw-grid a,.bw-grid span{display:flex;align-items:center;justify-content:center;height:46px;opacity:.32;transition:opacity .25s,transform .25s}
@@ -244,6 +327,21 @@ footer{display:none}
 .box-foot p{font-size:14px;color:#aab5cc;line-height:1.6;margin-bottom:16px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
 .chip{font-size:12px;border:1px solid #24365c;color:#c9d3e6;padding:6px 11px;border-radius:99px}
+.onsite-product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:4px}
+.onsite-product{min-height:210px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#101e3b,#09142b)}
+.onsite-product .product-art{height:118px;background:radial-gradient(circle at 70% 30%,rgba(232,181,62,.16),transparent 38%),#091329}
+.onsite-product .product-art svg{width:100%;height:100%;display:block}
+.onsite-product .product-copy{padding:14px}
+.onsite-product h3{font-size:17px;line-height:1.15;margin-bottom:6px}
+.onsite-product p{font-size:12.5px;line-height:1.5;color:#aab5cc}
+.brand-catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.brand-card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#09142b}
+.brand-card-art{height:128px;display:grid;place-items:center;background:radial-gradient(circle at 50% 30%,rgba(232,181,62,.14),transparent 48%),#0d1a34}
+.brand-card-art svg{width:92%;height:92%;display:block}
+.brand-card-copy{padding:14px}
+.brand-card-copy h3{font-size:17px;margin-bottom:8px}
+.model-list{display:flex;flex-wrap:wrap;gap:6px}
+.model-list span{border:1px solid #24365c;border-radius:999px;padding:5px 8px;font-size:11.5px;color:#c9d3e6}
 
 /* feature card (vinyl style) */
 .feature{background:var(--bg2);border:1px solid var(--line);border-radius:30px;padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
@@ -274,6 +372,7 @@ footer b{color:var(--text);font-family:Archivo,'Helvetica Neue',Arial,sans-serif
 
 @media (max-width:900px){
   .split,.feature,.boxes{grid-template-columns:1fr;gap:34px}
+  .onsite-product-grid,.brand-catalog{grid-template-columns:1fr}
   .hint{display:none}
   .support-tab{width:44px}
   .support-panel{right:52px;width:min(300px,80vw)}
@@ -332,6 +431,7 @@ body.intro-done .hero .hint{animation:hin .9s cubic-bezier(.2,.8,.2,1) .7s both}
 .slide .art img,.cover img,.thumb img,.feature .media img{width:100%;height:100%;object-fit:cover;display:block}
 /* การ์ดที่เป็นโปสเตอร์ (มีตัวหนังสือในรูปอยู่แล้ว): ซ่อนชื่อ/คำบรรยาย/เงามืด ไม่ให้ทับกัน */
 .slide.poster .art img{object-position:50% 12%}
+.slide.onsite-slide .art img{object-position:50% 43%}
 .slide.poster .art::after{background:linear-gradient(180deg,transparent 78%,rgba(0,0,0,.55) 100%)}
 .slide.care-slide .art::after{background:none}
 .slide.care-slide .cta{display:none}
@@ -340,21 +440,21 @@ body.intro-done .hero .hint{animation:hin .9s cubic-bezier(.2,.8,.2,1) .7s both}
 .feature .media.poster{aspect-ratio:auto;overflow:visible;display:flex;justify-content:center;align-items:center}
 .feature .media.poster img{width:auto;height:auto;max-width:100%;max-height:min(82vh,760px);object-fit:contain;border-radius:22px;box-shadow:0 40px 80px -30px rgba(0,0,0,.9)}
 /* ===== หน้า About (กดการ์ด 01) ===== */
-.feature.about{grid-template-columns:minmax(0,1fr) auto;gap:36px;padding:26px 34px;align-items:center}
-.about h2{font-size:clamp(24px,2.3vw,36px);line-height:1.1;margin:12px 0 14px;max-width:720px}
-.ab-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.feature.about{width:100%;min-height:calc(100vh - 72px);grid-template-columns:minmax(0,1fr) minmax(280px,32vw);gap:clamp(28px,5vw,72px);padding:24px clamp(28px,5vw,72px);align-items:center;border:0;border-radius:0;background:transparent}
+.about h2{font-size:clamp(22px,2.1vw,32px);line-height:1.05;margin:4px 0 7px;max-width:720px}
+.ab-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:5px}
 .ab-tabs button{position:relative;padding:8px 14px 10px;font-size:13.5px;font-weight:600;color:var(--muted);transition:color .2s}
 .ab-tabs button:hover,.ab-tabs button.on{color:var(--text)}
 .ab-tabs button.on::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:2px;border-radius:2px;background:var(--acc,#e8b53e)}
-.ab-panels{display:grid}
-.ab-p{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .35s,transform .35s,visibility 0s .35s}
-.ab-p.on{opacity:1;visibility:visible;transform:none;transition:opacity .35s,transform .35s}
-.ab-p>p{color:#aab5cc;font-size:14px;line-height:1.65;margin-bottom:10px;max-width:720px}
-.ab-meta{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.ab-panels{display:block}
+.ab-p{display:none;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
+.ab-p.on{display:block;opacity:1;transform:none}
+.ab-p>p{color:#aab5cc;font-size:13px;line-height:1.45;margin-bottom:5px;max-width:720px}
+.ab-meta{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:5px;padding-top:5px;border-top:1px dashed var(--line)}
 .ab-meta h4,.vm-c span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--acc,#e8b53e);font-weight:700;margin-bottom:7px}
 .ab-meta p{font-size:13px;line-height:1.55;color:#aab5cc}
 .ab-chips{display:flex;flex-wrap:wrap;gap:6px}
-.ab-chips span{font-size:12px;border:1px solid #24365c;background:#0b1630;color:#c9d3e6;padding:5px 10px;border-radius:99px}
+.ab-chips span{font-size:11.5px;border:1px solid #24365c;background:#0b1630;color:#c9d3e6;padding:4px 8px;border-radius:99px}
 .tl{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .tl li{padding:11px 13px;border:1px solid var(--line);border-radius:14px;background:rgba(11,22,48,.5);font-size:12.5px;line-height:1.5;color:#aab5cc}
 .tl li b{display:block;font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-size:18px;color:var(--acc,#e8b53e);margin-bottom:4px}
@@ -364,10 +464,17 @@ body.intro-done .hero .hint{animation:hin .9s cubic-bezier(.2,.8,.2,1) .7s both}
 .vm-c{padding:18px 22px;border:1px solid var(--line);border-left:3px solid var(--acc,#e8b53e);border-radius:14px;background:rgba(11,22,48,.5)}
 .vm-c span{display:block}
 .vm-c p{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-size:clamp(16px,1.4vw,20px);font-weight:700;line-height:1.35;color:var(--text)}
-.about .stats{margin:16px 0 16px;max-width:none}
-.about .stat{padding:10px 14px}.about .stat b{font-size:22px}
+.about .stats{margin:5px 0 7px;max-width:none}
+.about .stat{padding:7px 12px}.about .stat b{font-size:20px}
+.about .stats .stat span{font-size:11px}
+.about .btns .btn{padding:9px 16px}
 .about .btns{margin-bottom:0}
-.feature.about .media.poster img{max-height:min(calc(100vh - 160px),720px);max-width:min(372px,28vw)}
+.about-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:-2px}
+.about-social{display:flex;align-items:center;gap:8px;margin-bottom:1px}
+.about-social a{width:38px;height:38px;display:grid;place-items:center;border:1px solid #24365c;border-radius:50%;background:#0b1630;color:#c9d3e6;transition:.2s}
+.about-social a:hover{color:#fff;border-color:#e8b53e;box-shadow:0 0 18px -4px #e8b53e;transform:translateY(-2px)}
+.about-social svg{width:17px;height:17px;fill:currentColor}
+.feature.about .media.poster img{max-height:calc(100vh - 120px);max-width:min(420px,34vw)}
 /* ปุ่ม Back ให้กินที่น้อยลง */
 .back{flex-direction:row;gap:10px;padding:10px 20px 6px}
 .back i{width:38px;height:38px}
@@ -428,13 +535,14 @@ body.intro-done .hero .hint{animation:hin .9s cubic-bezier(.2,.8,.2,1) .7s both}
 body.viewing .hero{visibility:hidden;transition:visibility 0s linear .75s}
 body.viewing .hero,body.viewing .hero *{animation-play-state:paused!important}
 body.of-open .detail,body.of-open .detail *{animation-play-state:paused!important}
-.feature.about .media.poster.glowframe{width:auto}
+.feature.about .media.poster.glowframe{width:auto;margin-top:28px}
 /* ===== มือถือ (จอแคบ) ===== */
 @media (max-width:900px){
   .split,.feature,.boxes,.feature.about{grid-template-columns:minmax(0,1fr)}
   .split>*,.feature>*,.boxes>*{min-width:0}
+  .feature.about{min-height:auto;width:100%;padding:16px 12px 24px;border:0;border-radius:0;background:transparent}
   .detail-in{padding:4px 12px 32px}
-  .feature,.feature.about{padding:20px 16px;border-radius:22px;gap:26px}
+  .feature:not(.about){padding:20px 16px;border-radius:22px;gap:26px}
   .ab-panels{display:block}
   .ab-p{display:none;transform:none}
   .ab-p.on{display:block}
@@ -446,7 +554,9 @@ body.of-open .detail,body.of-open .detail *{animation-play-state:paused!importan
   .about .stat b{font-size:19px}
   .about .stat span{font-size:11px;line-height:1.3;display:block}
   .about .btns .btn{flex:1 1 auto;justify-content:center}
-  .feature.about .media.poster.glowframe{width:100%;max-width:440px}
+  .about-bottom{flex-direction:column;align-items:stretch;gap:10px}
+  .about-social{justify-content:flex-end}
+  .feature.about .media.poster.glowframe{width:100%;max-width:440px;margin-top:0}
   .feature.about .media.poster img{width:100%;max-width:100%;max-height:none}
   .status{flex-wrap:wrap;justify-content:center;text-align:center;padding:0 16px;font-size:13px;row-gap:2px}
   /* Customer Support: เปลี่ยนเป็นปุ่มกลมมุมขวาล่าง ไม่บังเนื้อหา */
@@ -457,7 +567,7 @@ body.of-open .detail,body.of-open .detail *{animation-play-state:paused!importan
   .support-tab:active{transform:translateY(-1px) scale(.98)}
   .support-tab .vt{display:none}
   .support-tab .ic{width:36px;height:36px}
-  .whatsapp-tab{top:auto;bottom:76px;left:14px;transform:none;width:auto;height:48px;padding:5px 15px 5px 7px;
+  .whatsapp-tab{top:auto;left:auto;right:14px;bottom:16px;transform:none;width:auto;height:48px;padding:5px 15px 5px 7px;
     flex-direction:row;gap:9px;border:1px solid rgba(255,255,255,.2);border-radius:999px;
     background:linear-gradient(135deg,#16b978,#08734f);box-shadow:0 10px 26px rgba(0,0,0,.38),0 0 0 3px rgba(37,211,102,.1)}
   .whatsapp-tab:hover,.whatsapp-tab:focus-visible{transform:translateY(-2px)}
@@ -472,7 +582,7 @@ body.of-open .detail,body.of-open .detail *{animation-play-state:paused!importan
 /* แถบปุ่ม Back: มีพื้นหลังไล่สี ไม่ให้ตัวหนังสือที่เลื่อนผ่านมาทับ */
 .back{width:100%;justify-content:center;background:linear-gradient(180deg,#030a1f 0%,#030a1f 62%,rgba(3,10,31,0) 100%);padding-bottom:16px;margin-bottom:-10px}
 @media (max-width:900px){.wm{display:none}.detail-in{padding-bottom:90px}}
-body.viewing .whatsapp-tab,body.of-open .whatsapp-tab{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(calc(-50% + 8px))}
+body.of-open .whatsapp-tab{opacity:0;visibility:hidden;pointer-events:none}
 @media (max-width:900px){body.viewing .support-tab,body.of-open .support-tab,body.viewing .support-panel,body.of-open .support-panel{opacity:0;visibility:hidden;pointer-events:none}}
 </style>
 </head>
@@ -534,6 +644,10 @@ body.viewing .whatsapp-tab,body.of-open .whatsapp-tab{opacity:0;visibility:hidde
   <div class="bigword" id="bigword">About</div>
   <a class="brand logo-top" href="#top" aria-label="ASSURICH"><img src="images/assurich-logo.png" alt="ASSURICH Industries Pte Ltd" decoding="async"></a>
   <div class="status"><i class="dot"></i><b>Now serving ASEAN</b> · 43+ years of industrial solutions</div>
+  <div class="ars-badge" aria-label="ASSURICH Referrer Scheme">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#e8b53e" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M8 10l4-3 4 3M8.5 14.5h7"/></svg>
+    <span>ASSURICH Referrer Scheme</span><em>(ARS)</em>
+  </div>
 
   <div class="stage" id="stage"><div class="track" id="track"></div></div>
 
@@ -620,12 +734,12 @@ care:`<svg viewBox="0 0 300 470" preserveAspectRatio="xMidYMid slice"><defs><lin
 
 /* ---------- DATA ---------- */
 const SLIDES = [
- {key:'about', poster:true, title:'About Assurich', word:'Assurich', acc:'#e8b53e', sub:'43+ years · 6 countries', tag:'01'},
- {key:'robot', art:'robotCard', poster:true, title:'Robot A1', word:'Robot A1', acc:'#f5a623', sub:'Cobots & material handling', tag:'PILLAR 1'},
  {key:'erw', art:'erwPoster', poster:true, title:'ERW', word:'ERW', acc:'#24466b', sub:'Engine rebuilding equipment', tag:'PILLAR 2'},
  {key:'onsite', art:'onsiteCard', poster:true, title:'On-Site', word:'On-Site', acc:'#e3141f', sub:'On-site machining tools', tag:'PILLAR 3'},
- {key:'valves', art:'valvesCard', poster:true, title:'Valves', word:'Valves', acc:'#168dff', sub:'Industrial valve shop', tag:'PILLAR 4 · SHOP'},
- {key:'care', art:'robocareCard', poster:true, title:'Robocare', word:'Robocare', acc:'#2fa86c', sub:'Healthcare robotics', tag:'PILLAR 5'}
+ {key:'about', poster:true, title:'About Assurich', word:'Assurich', acc:'#e8b53e', sub:'43+ years · 6 countries', tag:'01'},
+ {key:'robot', art:'robotCard', poster:true, title:'Robot A1', word:'Robot A1', acc:'#f5a623', sub:'Cobots & material handling', tag:'PILLAR 1'},
+ {key:'care', art:'robocareCard', poster:true, title:'Robocare', word:'Robocare', acc:'#2fa86c', sub:'Healthcare robotics', tag:'PILLAR 5'},
+ {key:'valves', art:'valvesCard', poster:true, title:'Valves', word:'Valves', acc:'#168dff', sub:'Industrial valve shop', tag:'PILLAR 4 · SHOP'}
 ];
 
 const L = (name, desc, url, logo) => ({name, desc, url, logo});
@@ -652,6 +766,21 @@ const ERW = [
  L('Kwi','Workshop equipment','')
 ];
 
+const ONSITE_PRODUCTS = [
+ {name:'Line Boring Machine',desc:'Portable line boring with bucket support for excavator and heavy-equipment bores.',art:'boring'},
+ {name:'Flange Facer',desc:'Precision on-site flange resurfacing and facing for workshop-grade sealing surfaces.',art:'flange'},
+ {name:'Torque Wrench',desc:'Controlled bolting equipment for high-torque installation and maintenance work.',art:'torque'},
+ {name:'Chemshell Pipe Cutting',desc:'Cold pipe cutting and bevel preparation for controlled on-site pipework.',art:'chemshell'}
+];
+
+const PUMP_VALVE_COUPLING = [
+ {name:'Sugino Pump',type:'pump',models:['K-Series High-pressure Pump','JCR Series','Pump Unit with Motor']},
+ {name:'Larlap Valve Grinding Machine',type:'grinder',models:['Portable Valve Grinding Unit','Valve Seat Grinding Unit','On-site Grinding Kit']},
+ {name:'Goyen Dust Collecting Valve',type:'dust',models:['RCAC Series','RCA Series','T Series Remote Pilot']},
+ {name:'Konan Solenoid Valve',type:'solenoid',models:['Direct-acting Series','Pilot-operated Series','Explosion-proof Series']},
+ {name:'Flender Coupling',type:'coupling',models:['N-EUPEX','RUPEX','ELPEX']}
+];
+
 /* ---------- helpers ---------- */
 const goBtn = (u,label='Website') => u
   ? `<a class="go" href="${u}" target="_blank" rel="noopener">${label} ▶</a>`
@@ -661,6 +790,24 @@ const rows = (arr, cls='') => `<div class="rows">${arr.map((x,i)=>`
   <div class="who">${x.logo?`<span class="logo"><img src="images/brands/${x.logo}.png" alt="${x.name} logo" loading="lazy"></span>`:''}<div><div class="nm">${x.name}</div><div class="ds">${x.desc}</div></div></div>${goBtn(x.url)}</div>`).join('')}</div>`;
 const cover = (key,t1,t2) => `<div class="cover">${ART[key]}<div class="ov"><div class="t1">${t1}</div><div class="t2">${t2}</div></div></div>`;
 const thumb = key => `<div class="thumb">${ART[key]}</div>`;
+
+const onsiteProductArt = kind => {
+ if(kind==='flange') return `<svg viewBox="0 0 300 150" aria-hidden="true"><defs><linearGradient id="pf" x1="0" x2="1"><stop stop-color="#9ca7b2"/><stop offset=".5" stop-color="#e2e6ea"/><stop offset="1" stop-color="#697681"/></linearGradient></defs><rect width="300" height="150" fill="#091329"/><circle cx="150" cy="82" r="54" fill="url(#pf)" stroke="#e8b53e" stroke-width="5"/><circle cx="150" cy="82" r="26" fill="#091329" stroke="#bfc7cd" stroke-width="8"/><rect x="58" y="72" width="184" height="20" rx="6" fill="url(#pf)"/><g fill="#6f7a83">${[75,103,131,169,197,225].map(x=>`<circle cx="${x}" cy="${82}" r="4"/>`).join('')}</g></svg>`;
+ if(kind==='torque') return `<svg viewBox="0 0 300 150" aria-hidden="true"><rect width="300" height="150" fill="#091329"/><path d="M52 92h148l28-24" fill="none" stroke="#d9dfe5" stroke-width="22" stroke-linecap="round"/><rect x="196" y="38" width="70" height="28" rx="5" fill="#e3141f"/><circle cx="62" cy="92" r="30" fill="none" stroke="#e8b53e" stroke-width="8"/><circle cx="62" cy="92" r="12" fill="#9da7b1"/></svg>`;
+ if(kind==='chemshell') return `<svg viewBox="0 0 300 150" aria-hidden="true"><defs><linearGradient id="pc" x1="0" x2="1"><stop stop-color="#596774"/><stop offset=".5" stop-color="#edf1f4"/><stop offset="1" stop-color="#697681"/></linearGradient></defs><rect width="300" height="150" fill="#091329"/><rect x="20" y="64" width="260" height="28" rx="14" fill="url(#pc)"/><rect x="105" y="40" width="84" height="76" rx="10" fill="#202d42" stroke="#e8b53e" stroke-width="4"/><circle cx="147" cy="78" r="18" fill="#111827" stroke="#d9dfe5" stroke-width="5"/><path d="M147 78l42-28" stroke="#e3141f" stroke-width="5"/></svg>`;
+ return `<svg viewBox="0 0 300 150" aria-hidden="true"><rect width="300" height="150" fill="#091329"/><rect x="38" y="58" width="224" height="38" rx="19" fill="#8d99a5"/><rect x="20" y="68" width="260" height="18" rx="9" fill="#cfd6dc"/><rect x="102" y="36" width="96" height="82" rx="8" fill="#202d42" stroke="#e8b53e" stroke-width="4"/><circle cx="150" cy="77" r="22" fill="#091329" stroke="#d9dfe5" stroke-width="7"/></svg>`;
+};
+
+const brandArt = type => {
+ const shapes={
+  pump:`<rect x="66" y="38" width="168" height="74" rx="12" fill="#cfd6dc"/><rect x="88" y="56" width="124" height="38" rx="5" fill="#1d2a3d"/><circle cx="112" cy="112" r="22" fill="#e3141f"/><circle cx="188" cy="112" r="22" fill="#e3141f"/><path d="M112 112h76" stroke="#e8b53e" stroke-width="8"/>`,
+  grinder:`<rect x="52" y="68" width="196" height="34" rx="5" fill="#cfd6dc"/><circle cx="150" cy="76" r="42" fill="#1d2a3d" stroke="#e8b53e" stroke-width="7"/><circle cx="150" cy="76" r="20" fill="#091329" stroke="#cfd6dc" stroke-width="6"/>`,
+  dust:`<path d="M86 112V58h128v54" fill="#cfd6dc"/><rect x="112" y="38" width="76" height="32" rx="16" fill="#e3141f"/><circle cx="150" cy="54" r="8" fill="#091329"/><path d="M150 70v42" stroke="#e8b53e" stroke-width="5"/>`,
+  solenoid:`<rect x="74" y="58" width="152" height="54" rx="8" fill="#cfd6dc"/><rect x="112" y="42" width="76" height="35" rx="6" fill="#1d2a3d"/><circle cx="150" cy="59" r="10" fill="#e8b53e"/><path d="M98 112v18M202 112v18" stroke="#7f8b96" stroke-width="12"/>`,
+  coupling:`<circle cx="150" cy="85" r="58" fill="#1d2a3d" stroke="#cfd6dc" stroke-width="10"/><circle cx="150" cy="85" r="28" fill="#091329" stroke="#e8b53e" stroke-width="8"/><path d="M150 27v116M92 85h116" stroke="#cfd6dc" stroke-width="8"/>`
+ }[type];
+ return `<svg viewBox="0 0 300 150" aria-hidden="true"><rect width="300" height="150" fill="#091329"/>${shapes}</svg>`;
+};
 
 /* ---------- PANES ---------- */
 const PANES = {
@@ -700,42 +847,47 @@ about:()=>`
      </div>
     </div>
    </div>
-   <div class="stats">
-    <div class="stat"><b>43+</b><span>Years of experience</span></div>
-    <div class="stat"><b>6</b><span>ASEAN countries</span></div>
-    <div class="stat"><b>1-Stop</b><span>Sales &amp; service</span></div>
-   </div>
-   <div class="btns"><a class="btn red" href="#" data-go="1">Explore solutions →</a><button class="btn ghost" data-offices>Contact us</button></div>
+    <div class="about-bottom">
+     <div>
+      <div class="stats">
+       <div class="stat"><b>43+</b><span>Years of experience</span></div>
+       <div class="stat"><b>6</b><span>ASEAN countries</span></div>
+       <div class="stat"><b>1-Stop</b><span>Sales &amp; service</span></div>
+      </div>
+      <div class="btns"><a class="btn red" href="#" data-go="1">Explore solutions →</a><button class="btn ghost" data-offices>Contact us</button></div>
+     </div>
+     <div class="about-social" aria-label="ASSURICH social media">
+      <a href="https://www.facebook.com/search/top?q=ASSURICH" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 1.9-5 5v2H6v4h3v7h4v-7h3l1-4h-4V9c0-.7.3-1 1-1z"/></svg></a>
+      <a href="https://www.linkedin.com/search/results/all/?keywords=ASSURICH" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.3 7.8H2.1V22h3.2V7.8zM3.7 2A1.9 1.9 0 102 3.9 1.9 1.9 0 003.7 2zm18.2 10.8c0-4-2.1-5.8-5-5.8a4.3 4.3 0 00-3.9 2.1V7.8H9.8V22H13v-7c0-1.9.4-3.7 2.7-3.7 2.3 0 2.3 2.2 2.3 3.8V22H21v-7.9c0-1.1.1-2.2.9-3.3z"/></svg></a>
+      <a href="https://www.youtube.com/results?search_query=ASSURICH" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.8V8.2l6.3 3.8-6.3 3.8z"/></svg></a>
+      <a href="https://www.tiktok.com/search?q=ASSURICH" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.7 2c.3 2.2 1.5 3.5 3.7 3.7v3.2a7.8 7.8 0 01-3.7-1v6.5A5.6 5.6 0 1111.2 8.8v3.3a2.4 2.4 0 102.3 2.4V2h3.2z"/></svg></a>
+      <a href="https://www.instagram.com/explore/search/keyword/?q=ASSURICH" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm5.5-3.5a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/></svg></a>
+     </div>
+    </div>
   </div>
   <button class="media poster glowframe" type="button" data-offices aria-label="View our offices across ASEAN"><span class="gf-ring"></span>${ART.aboutMap}<span class="gf-hint">Click to view our offices</span></button>
  </div>`,
 
 robot:()=>`
- <div class="split pane">
-  <div class="cover flow">${ART.robotFlow}</div>
-  <div>
-   <div class="eyebrow">Pillar 1</div>
-   <h1 class="big">Robot A1</h1>
-   <div class="meta"><span>ASSURICH</span><span>9 brands</span><span>Cobot + Material handling</span></div>
-   <div class="btns"><a class="btn red" href="https://www.robota1.com" target="_blank" rel="noopener">Visit website →</a><a class="btn ghost" href="#robot-boxes">See brands</a></div>
-   <p class="lead">A curated, gallery-style edit of ROBOTA1's portfolio. Two GSK arms and a CROBOTP arm reach in unison from spotlit platforms, and a pair of collaborative robots and a welding cobot cart fill the middle ground. A JATEN AGV, an autonomous forklift and a humanoid robot anchor the mirror-black floor. Fewer pieces and generous space give each product a premium, launch-ready presence.</p>
-   <div class="brandwall">
-    <div class="bw-label">Our brands</div>
-    <div class="bw-grid">${ROBOT_WALL.map(x=>x.url
-      ? `<a href="${x.url}" target="_blank" rel="noopener" title="${x.name}"><img src="images/brands/wall/${x.logo}.png" alt="${x.name}" loading="lazy"></a>`
-      : `<span title="${x.name}"><img src="images/brands/wall/${x.logo}.png" alt="${x.name}" loading="lazy"></span>`).join('')}</div>
+ <div class="robot-catalog pane" id="robot-boxes">
+  <article class="robot-category">
+   <div class="robot-category-layout">
+    <div class="robot-category-head">
+     <span class="tag">PILLAR 1 · 5 BRANDS</span>
+     <div><h2>Robot<br>Automation</h2><p>Collaborative arms, industrial robots and welding automation.</p></div>
+    </div>
+    <div class="robot-category-list">${rows(ROBOT_COBOT)}</div>
    </div>
-  </div>
- </div>
- <div class="boxes pane" id="robot-boxes" style="margin-top:40px">
-  <div class="box">
-   <div class="box-head plain"><div><h3>Robot Automation</h3><span class="tag">5 BRANDS</span><p>Welding · CNC tending · Pick &amp; place</p></div></div>
-   ${rows(ROBOT_COBOT)}
-  </div>
-  <div class="box">
-   <div class="box-head plain"><div><h3>Lifting &amp; Handling</h3><span class="tag">4 BRANDS</span><p>Lift tables · Forklifts · Warehouse</p></div></div>
-   ${rows(ROBOT_LIFT)}
-  </div>
+  </article>
+  <article class="robot-category">
+   <div class="robot-category-layout">
+    <div class="robot-category-head">
+     <span class="tag">PILLAR 1 · 4 BRANDS</span>
+     <div><h2>Handling &amp;<br>Lifting</h2><p>Lift tables, forklifts and smart material-handling equipment.</p></div>
+    </div>
+    <div class="robot-category-list">${rows(ROBOT_LIFT)}</div>
+   </div>
+  </article>
  </div>`,
 
 erw:()=>`
@@ -751,37 +903,64 @@ erw:()=>`
  </div>`,
 
 onsite:()=>`
- <div class="split pane even">
-  <div class="cover flow">${ART.onsiteCard}</div>
-  <div>
-   <div class="eyebrow">Pillar 3</div>
-   <h1 class="big">On-Site</h1>
-   <div class="meta"><span>ASSURICH</span><span>Boring · Milling · Flange facing</span></div>
-   <div class="boxes stack" id="onsite-boxes">
-  <div class="box">
-   <div class="box-head"><div class="thumb wide"><img src="images/brands/insitools.png" alt="INSITOOLS logo" loading="lazy"></div><div><h3>Insitools</h3><span class="tag">ON-SITE MACHINING</span></div></div>
-   <div class="box-foot"><p>INSITOOLS is a global leader in portable machining and welding solutions, empowering industries to perform complex on-site maintenance with minimal downtime. Our machines deliver workshop accuracy right to your field application.</p>
-    <div class="chips"><span class="chip">Line boring</span><span class="chip">Bore welding</span><span class="chip">Flange facing</span><span class="chip">Milling</span></div>
-    <a class="btn red" href="https://www.insitools.com" target="_blank" rel="noopener">Visit Insitools →</a></div>
-  </div>
-  <div class="box">
-   <div class="box-head"><div class="thumb wide">${ART.erw}</div><div><h3>UROmac</h3><span class="tag">ON-SITE MACHINING</span><p>Portable machine tools</p></div></div>
-   <div class="box-foot"><p>Portable machining solutions for heavy industry — accurate results directly on site.</p>
-    <div class="chips"><span class="chip">Portable</span><span class="chip">Heavy industry</span><span class="chip">Field service</span></div>
-    <span class="btn red go soon" style="padding:13px 22px">Visit UROmac →</span></div>
-  </div>
+ <div class="onsite-catalog pane" id="onsite-boxes">
+  <article class="onsite-category insitools-category">
+   <div class="onsite-category-layout">
+    <div class="onsite-category-head insitools-head">
+     <span class="tag" style="display:none">PILLAR 3 · INSITOOLS</span>
+     <div class="onsite-brand-banner"><img src="images/insitools-banner.png" alt="INSITOOLS Portable Machining &amp; Welding Solutions"></div>
+    </div>
+    <div class="onsite-category-content">
+     <div class="onsite-link-grid">
+      <a class="onsite-link-card" href="https://insitools.com/products.html" target="_blank" rel="noopener">
+       <span class="n">01 · EQUIPMENT</span>
+       <h3>Products</h3>
+       <span class="go">Explore products ▶</span>
+      </a>
+      <a class="onsite-link-card" href="https://insitools.com/service-rent.html" target="_blank" rel="noopener">
+       <span class="n">02 · FIELD SUPPORT</span>
+       <h3>On-Site Service</h3>
+       <span class="go">Service &amp; rent ▶</span>
+      </a>
+     </div>
+    </div>
    </div>
-  </div>
+  </article>
+  <article class="onsite-category">
+   <div class="onsite-category-layout">
+    <div class="onsite-category-head">
+     <span class="tag">PILLAR 3 · UROMAC</span>
+     <div><h2>UROMAC</h2><p>Portable machine tools for heavy-industry field machining.</p></div>
+    </div>
+    <div class="onsite-category-content">
+     <div class="uromac-list">
+      <div class="uromac-item"><b>Portable Machining</b><span>Workshop accuracy directly on site</span></div>
+      <div class="uromac-item"><b>Field Maintenance</b><span>Machining, repair and installation support</span></div>
+      <div class="uromac-item"><b>Boring &amp; Facing</b><span>Precision equipment for demanding industries</span></div>
+      <div class="uromac-item"><b>Custom Solutions</b><span>Selected equipment for customer applications</span></div>
+     </div>
+    </div>
+   </div>
+  </article>
  </div>`,
 
 valves:()=>`
  <div class="feature pane valves-feature">
   <div class="media valve-poster">${ART.valvesCard}</div>
   <div>
-   <span class="badge">Shop</span>
-   <h2>Industrial Valves <em>in stock.</em></h2>
-   <p class="lead">Gate, ball, butterfly and control valves for marine, oil &amp; gas and process plants — ready to ship across ASEAN.</p>
-   <div class="btns" style="margin-top:28px"><button class="btn red" data-sup>Shop valves →</button></div>
+   <span class="badge">Pillar 4</span>
+   <h2>Pump / Valve / <em>Coupling</em></h2>
+   <p class="lead">Selected common models for pumps, valve servicing, dust collection valves and couplings.</p>
+   <div class="brand-catalog">
+    ${PUMP_VALVE_COUPLING.map(b=>`
+      <article class="brand-card">
+       <div class="brand-card-art">${brandArt(b.type)}</div>
+       <div class="brand-card-copy">
+        <h3>${b.name}</h3>
+        <div class="model-list">${b.models.map(m=>`<span>${m}</span>`).join('')}</div>
+       </div>
+      </article>`).join('')}
+   </div>
   </div>
  </div>`,
 
@@ -795,12 +974,13 @@ care:()=>`
 const track = document.getElementById('track');
 const counter = document.getElementById('counter');
 const N = SLIDES.length;
-let cur = 0;
+let cur = SLIDES.findIndex(s=>s.key==='about');
 
 SLIDES.forEach((s,i)=>{
   const el = document.createElement('div');
   el.className='slide'+(s.poster?' poster':'');
   if(s.key==='care') el.classList.add('care-slide');
+  if(s.key==='onsite') el.classList.add('onsite-slide');
   el.classList.add('enter');
   el.innerHTML = `<div class="inner"><div class="shine"></div><div class="art">${ART[s.art||s.key]}</div><div class="num">${s.tag}</div><div class="ttl">${s.title}</div><div class="sub">${s.sub}</div><div class="cta">▶ Explore</div></div>`;
   el.addEventListener('click',()=>{ if(dragMoved) return; if(i===cur) openPane(i,true); else go(i); });
@@ -880,12 +1060,12 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ if(offOpen())clos
 
 /* ---------- OFFICES POPUP (ข้อมูลสาขา แก้ได้ที่นี่) ---------- */
 const OFFICES=[
- {cc:'SG',name:'Singapore',hq:true,lines:[{addr:'9 Tagore Lane #04-28, 9@Tagore, Singapore 787472',tel:['+65 6459 1069']}]},
+ {cc:'SG',name:'Singapore',hq:true,lines:[{addr:'9 Tagore Lane #04-28, 9@Tagore, Singapore 787472',tel:['+65 6459 1069'],wa:'+65 9818 3419'}]},
  {cc:'MY',name:'Malaysia',lines:[{addr:'No. 79, Jalan Platinum 5/6, XME Business Park, Nilai 71800, Negeri Sembilan',wa:'+65 9818 3419'}]},
- {cc:'ID',name:'Indonesia',lines:[{label:'Jakarta',addr:'Golden Boulevard Blk C No.16, BSD City',tel:['+62 21 5316 0697']},{label:'Balikpapan',addr:'Ruko Paladium Blk G.10, Grand City',tel:['+62 542 851 7857']}]},
- {cc:'VN',name:'Vietnam',lines:[{addr:'3rd Floor, 41 Vu Pham Ham Street, Cau Giay Ward, Hanoi',tel:['+84 24 3200 4615']}]},
- {cc:'TH',name:'Thailand',lines:[{addr:'69/5 Soi 11/1, Sukhaphiban 2 Road, Prawet, Bangkok 10250',tel:['+66 2 029 9378']}]},
- {cc:'PH',name:'Philippines',lines:[{addr:'3/F La Aldea Commercial Bldg., McArthur Hwy, Tabang, Guiguinto 3016, Bulacan',tel:['+63 44 762 8362']}]}
+ {cc:'ID',name:'Indonesia',lines:[{label:'Balikpapan',addr:'Ruko Paladium Blk G.10, Grand City',tel:['+62 542 851 7857'],wa:'+65 9818 3419'}]},
+ {cc:'VN',name:'Vietnam',lines:[{addr:'3rd Floor, 41 Vu Pham Ham Street, Cau Giay Ward, Hanoi',tel:['+84 24 3200 4615'],wa:'+65 9818 3419'}]},
+ {cc:'TH',name:'Thailand',lines:[{addr:'69/5 Soi 11/1, Sukhaphiban 2 Road, Prawet, Bangkok 10250',tel:['+66 2 029 9378'],wa:'+65 9818 3419'}]},
+ {cc:'PH',name:'Philippines',lines:[{addr:'3/F La Aldea Commercial Bldg., McArthur Hwy, Tabang, Guiguinto 3016, Bulacan',tel:['+63 44 762 8362'],wa:'+65 9818 3419'}]}
 ];
 const IC={
  tel:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>',
@@ -917,7 +1097,7 @@ function openSup(){sp.classList.add('open');}
 document.getElementById('supBtn').onclick=()=>sp.classList.toggle('open');
 document.getElementById('supClose').onclick=()=>sp.classList.remove('open');
 
-layout(); openPane(0,false);
+layout(); openPane(cur,false);
 
 /* ---------- BOOM: entrance ---------- */
 slides.forEach((el,i)=>setTimeout(()=>el.classList.remove('enter'),150+Math.abs(i-(i>N/2?N:0))*130));
@@ -939,7 +1119,7 @@ const _go=go; go=function(i){userTook=true;_go(i);restart();};
 stage.addEventListener('mouseenter',()=>{paused=true;restart();});
 stage.addEventListener('mouseleave',()=>{paused=false;restart();});
 restart();
-addEventListener('introdone',()=>{cur=0;layout();openPane(0,false);restart();}); /* จบไตเติล: เริ่มที่ About (01) ตรงกลาง */
+addEventListener('introdone',()=>{cur=SLIDES.findIndex(s=>s.key==='about');layout();openPane(cur,false);restart();}); /* จบไตเติล: เริ่มที่ About (01) ตรงกลาง */
 
 /* ---------- BOOM: marquee ---------- */
 const words=['Robotics','Cobot Arms','Engine Rebuilding','On-Site Machining','Industrial Valves','Robocare','43+ Years','6 ASEAN Countries'];
