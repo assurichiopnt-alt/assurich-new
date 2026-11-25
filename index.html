@@ -40,15 +40,18 @@ h1,h2,h3,.disp{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;letter-spac
 .brand.logo-top img{display:block;width:min(78vw,480px);height:auto;filter:drop-shadow(0 6px 16px rgba(0,0,0,.4)) drop-shadow(0 0 8px rgba(0,184,255,.18));animation:logoSparkle 4.8s ease-in-out infinite;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
 .brand.logo-top:hover img{transform:translateY(-2px) scale(1.02)}
 @keyframes logoSparkle{0%,60%,100%{filter:drop-shadow(0 6px 16px rgba(0,0,0,.4)) drop-shadow(0 0 8px rgba(0,184,255,.18))}63%{filter:drop-shadow(0 8px 22px rgba(0,0,0,.34)) drop-shadow(0 0 28px rgba(0,194,255,.72)) drop-shadow(0 0 44px rgba(255,255,255,.36))}66%{filter:drop-shadow(0 6px 16px rgba(0,0,0,.4)) drop-shadow(0 0 8px rgba(0,184,255,.18))}69%{filter:drop-shadow(0 8px 22px rgba(0,0,0,.34)) drop-shadow(0 0 24px rgba(0,194,255,.64)) drop-shadow(0 0 38px rgba(255,255,255,.3))}72%{filter:drop-shadow(0 6px 16px rgba(0,0,0,.4)) drop-shadow(0 0 8px rgba(0,184,255,.18))}}
-.hero .status{margin-top:10px}
-.hero .brand.logo-top~.stage{margin-top:clamp(14px,2.6vh,34px);height:clamp(380px,52vh,560px)}
+.hero .status{margin-top:4px}
+.hero .brand.logo-top~.stage{margin-top:clamp(8px,1.4vh,18px);height:clamp(380px,52vh,560px)}
 .hero .brand.logo-top~.stage .slide{width:clamp(220px,min(21vw,30vh),330px)}
 .hero:has(.logo-top){padding-top:16px}
 .status{margin-top:14px;font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center}
 .status b{color:var(--text);font-weight:600}
-.ars-badge{display:flex;align-items:center;gap:9px;margin-top:10px;padding:7px 12px;border:1px solid rgba(232,181,62,.38);border-radius:999px;background:rgba(8,17,39,.72);font-size:12px;font-weight:700;letter-spacing:.04em;color:#f1dca0}
+.ars-badge{display:flex;align-items:center;gap:9px;margin-top:5px;padding:5px 10px;border:1px solid rgba(232,181,62,.38);border-radius:999px;background:rgba(8,17,39,.72);font-size:11px;font-weight:700;letter-spacing:.04em;color:#f1dca0}
 .ars-badge svg{width:18px;height:18px;flex:none}
 .ars-badge span{color:#fff}.ars-badge em{font-style:normal;color:#e8b53e}
+.certification-strip{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:4px}
+.cert-badge{height:28px;display:flex;align-items:center;justify-content:center;padding:2px 5px;border:1px solid rgba(232,181,62,.28);border-radius:6px;background:rgba(8,17,39,.72);box-shadow:0 8px 22px -16px rgba(232,181,62,.7)}
+.cert-badge svg{height:22px;width:auto;display:block}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(227,20,31,.6);animation:pulse 1.8s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(227,20,31,0)}100%{box-shadow:0 0 0 0 rgba(227,20,31,0)}}
 
@@ -455,6 +458,9 @@ body.intro-done .hero .hint{animation:hin .9s cubic-bezier(.2,.8,.2,1) .7s both}
 .ab-meta p{font-size:13px;line-height:1.55;color:#aab5cc}
 .ab-chips{display:flex;flex-wrap:wrap;gap:6px}
 .ab-chips span{font-size:11.5px;border:1px solid #24365c;background:#0b1630;color:#c9d3e6;padding:4px 8px;border-radius:99px}
+.subsidiary-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.subsidiary-list a{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border:1px solid #24365c;border-radius:10px;background:#0b1630;color:#dbe5f6;font-size:12px;font-weight:700;transition:.2s}
+.subsidiary-list a:hover{border-color:#e8b53e;box-shadow:0 0 18px -8px #e8b53e;transform:translateY(-1px)}
 .tl{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .tl li{padding:11px 13px;border:1px solid var(--line);border-radius:14px;background:rgba(11,22,48,.5);font-size:12.5px;line-height:1.5;color:#aab5cc}
 .tl li b{display:block;font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-size:18px;color:var(--acc,#e8b53e);margin-bottom:4px}
@@ -548,6 +554,7 @@ body.of-open .detail,body.of-open .detail *{animation-play-state:paused!importan
   .ab-p.on{display:block}
   .ab-tabs{margin-left:-4px;margin-right:-4px}
   .ab-tabs button{padding:8px 10px 10px;font-size:13px}
+  .subsidiary-list{grid-template-columns:1fr}
   .about h2{font-size:clamp(24px,7vw,30px)}
   .about .stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
   .about .stat{padding:10px}
@@ -647,6 +654,27 @@ body.of-open .whatsapp-tab{opacity:0;visibility:hidden;pointer-events:none}
   <div class="ars-badge" aria-label="ASSURICH Referrer Scheme">
     <svg viewBox="0 0 24 24" fill="none" stroke="#e8b53e" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M8 10l4-3 4 3M8.5 14.5h7"/></svg>
     <span>ASSURICH Referrer Scheme</span><em>(ARS)</em>
+  </div>
+  <div class="certification-strip" aria-label="ASSURICH certifications">
+    <span class="cert-badge" title="ISO 9001">
+      <svg viewBox="0 0 118 42" role="img" aria-label="ISO 9001">
+        <rect width="118" height="42" rx="8" fill="#f7f8fa"/>
+        <circle cx="21" cy="21" r="15" fill="none" stroke="#183153" stroke-width="2"/>
+        <path d="M21 10v22M14 14l7 7 7-7M14 28l7-7 7 7" fill="none" stroke="#183153" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="41" y="20" fill="#183153" font-family="Arial,sans-serif" font-size="13" font-weight="800">ISO</text>
+        <text x="41" y="34" fill="#183153" font-family="Arial,sans-serif" font-size="13" font-weight="800">9001</text>
+        <text x="89" y="34" fill="#b58a20" font-family="Arial,sans-serif" font-size="8" font-weight="700">CERT.</text>
+      </svg>
+    </span>
+    <span class="cert-badge" title="BizSAFE">
+      <svg viewBox="0 0 112 42" role="img" aria-label="BizSAFE">
+        <rect width="112" height="42" rx="8" fill="#eef4ff"/>
+        <path d="M18 8l13 4v8c0 8-5 12-13 15-8-3-13-7-13-15v-8z" fill="#2765b7"/>
+        <path d="M11 21l5 5 9-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="38" y="20" fill="#2765b7" font-family="Arial,sans-serif" font-size="16" font-weight="900">BizSAFE</text>
+        <text x="38" y="34" fill="#d02b35" font-family="Arial,sans-serif" font-size="8" font-weight="700">WORKPLACE SAFETY</text>
+      </svg>
+    </span>
   </div>
 
   <div class="stage" id="stage"><div class="track" id="track"></div></div>
@@ -828,6 +856,10 @@ about:()=>`
      <div class="ab-meta">
       <div><h4>Where we are</h4><p>Headquartered in Singapore, with offices in Malaysia, Indonesia, Vietnam, Thailand and the Philippines for closer, more cohesive support.</p></div>
       <div><h4>What we focus on</h4><div class="ab-chips"><span>Robotic Automation</span><span>Engine Rebuilding Equipment</span><span>On-Site Machining</span></div></div>
+     </div>
+     <div class="subsidiary-list" aria-label="Malaysian subsidiaries">
+      <a href="https://www.assurich.com" target="_blank" rel="noopener"><span>Average Engineering Sdn Bhd</span><b>↗</b></a>
+      <a href="https://www.assurich.com" target="_blank" rel="noopener"><span>Assurich Robotics</span><b>↗</b></a>
      </div>
     </div>
     <div class="ab-p" data-p="jr">
